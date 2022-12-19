@@ -80,7 +80,7 @@
                             <a href="{{ route('admin.customer.index') }}" class="dropdown-item">All Customers</a>
                         </div>
                     </div>
-                    <a href="widget.html" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Widgets</a>
+                    <a href="{{ route('admin.enquiry.index') }}" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Enquiries</a>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="far fa-file-alt me-2"></i>Pages</a>
                         <div class="dropdown-menu bg-transparent border-0">

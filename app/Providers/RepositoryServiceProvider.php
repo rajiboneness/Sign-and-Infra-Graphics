@@ -6,12 +6,14 @@ use App\Interfaces\CategoryInterface;
 use App\Interfaces\CustomerInterface;
 use App\Interfaces\ServiceInterface;
 use App\Interfaces\EmployeeInterface;
+use App\Interfaces\EnquiryInterface;
 
 
 use App\Repositories\CategoryRepository;
 use App\Repositories\CustomerRepository;
 use App\Repositories\ServiceRepository;
 use App\Repositories\EmployeeRepository;
+use App\Repositories\EnquiryRepository;
 
 
 
@@ -30,6 +32,7 @@ class RepositoryServiceProvider extends ServiceProvider
         $this->app->bind(CustomerInterface::class, CustomerRepository::class);
         $this->app->bind(ServiceInterface::class, ServiceRepository::class);
         $this->app->bind(EmployeeInterface::class, EmployeeRepository::class);
+        $this->app->bind(EnquiryInterface::class, EnquiryRepository::class);
         
     }
 

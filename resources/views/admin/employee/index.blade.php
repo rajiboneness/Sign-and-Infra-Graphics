@@ -43,9 +43,9 @@
                                             </div>
                                             <!-- Delete Modal -->
                                             <div class="modal fade" id="deleteModal{{ $key+1 }}" tabindex="-1" aria-hidden="true">
-                                                <div class="modal-dialog deleteModal">
+                                                <div class="modal-dialog deleteModal modal-dialog-centered modal-sm">
                                                     <div class="modal-content">
-                                                        <div><i class="fa fa-check" aria-hidden="true"></i></div>
+                                                        <div class="pb-4"><i class="fa fa-check" aria-hidden="true"></i></div>
                                                         <h3>Are You Sure ?</h3>
                                                         <div class="">
                                                         <a href="{{ route('admin.employee.delete', $value->id) }}" class="btn btn-danger">Delete</a>

@@ -19,7 +19,7 @@ class CustomerRepository implements CustomerInterface
 
         $collection = collect($arrayData);
         $Store = new Customer;
-        $Store->customer_code = 'SAI-'.rand(100000,999999);
+        $Store->customer_code = 'S'.rand(100,999).'A'.rand(100,999).'IN'.rand(100,999);
         $Store->fname = ucwords($collection['fname']);
         $Store->lname = ucwords($collection['lname']);
         $Store->email = $collection['email'];

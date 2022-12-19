@@ -24,7 +24,7 @@
                                     <th scope="col">Name</th>
                                     <th scope="col">Email</th>
                                     <th scope="col">Mobile</th>
-                                    <th scope="col">WhatsApp</th>
+                                    <th scope="col">WhatsApp <img src="{{ asset('admin/img/whatsapp.png') }}" alt="" width="10%"></th>
                                     <th scope="col">Company Name</th>
                                     <th scope="col">Status</th>
                                     <th scope="col">Date</th>
@@ -48,9 +48,9 @@
                                             <div class="modal fade" id="registereditModal{{ $key+1 }}" tabindex="-1" aria-labelledby="registereditModalLabel{{ $key+1 }}" aria-hidden="true">
                                                 <div class="modal-dialog">
                                                         <div class="modal-content">
-                                                            <div class="modal-header">
+                                                            <div class="modal-header view_modal">
                                                             <h5 class="modal-title" id="registereditModalLabel{{ $key+1 }}">Customer Details</h5>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            {{-- <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button> --}}
                                                             </div>
                                                             <div class="modal-body">
                                                                 <p><b>Customer Code : </b>{{ $value->customer_code }}</p>
@@ -67,14 +67,17 @@
                                                                 <p><b>City : </b>{{ $value->city }} | <b>State : </b> {{ $value->state }}</p>
                                                                 <p><b>Country : </b>{{ $value->country }} | <b>Pin : </b> {{ $value->pincode }}</p>
                                                             </div>
+                                                            <div class="modal_footer" data-bs-dismiss="modal">
+                                                                <button>Close</button>
+                                                            </div>
                                                         </div>
                                                 </div>
                                             </div>
                                             <!-- Delete Modal -->
                                             <div class="modal fade" id="deleteModal{{ $key+1 }}" tabindex="-1" aria-hidden="true">
-                                                <div class="modal-dialog deleteModal">
+                                                <div class="modal-dialog modal-dialog-centered deleteModal modal-sm">
                                                     <div class="modal-content">
-                                                        <div><i class="fa fa-check" aria-hidden="true"></i></div>
+                                                        <div class="pb-4"><i class="fa fa-check" aria-hidden="true"></i></div>
                                                         <h3>Are You Sure ?</h3>
                                                         <div class="">
                                                         <a href="{{ route('admin.customer.delete', $value->id) }}" class="btn btn-danger">Delete</a>

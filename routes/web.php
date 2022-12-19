@@ -65,6 +65,21 @@ Route::prefix('admin')->name('admin.')->group(function(){
             Route::get('/{id}/status', 'Admin\EmployeeController@status')->name('status');
             Route::get('/{id}/delete', 'Admin\EmployeeController@destroy')->name('delete');
         });
+        // Enquiry
+
+        Route::prefix('enquiry')->name('enquiry.')->group(function(){
+            Route::get('/', 'Admin\EnquiryController@index')->name('index');
+            Route::get('/add', 'Admin\EnquiryController@add')->name('add');
+            Route::post('/ajaxsearch', 'Admin\EnquiryController@ajaxsearch')->name('ajaxsearch');
+            Route::post('/category_wise_service', 'Admin\EnquiryController@category_wise_service')->name('category_wise_service');
+            Route::post('/store', 'Admin\EnquiryController@store')->name('store');
+            Route::get('/{id}/view', 'Admin\EnquiryController@view')->name('view');
+            Route::get('/{id}/edit', 'Admin\EnquiryController@edit')->name('edit');
+            Route::post('/{id}/update', 'Admin\EnquiryController@update')->name('update');
+            Route::get('/{id}/delete', 'Admin\EnquiryController@destroy')->name('delete');
+            Route::post('/status', 'Admin\EnquiryController@status')->name('status');
+            route::get('/{id}/detailsDelete', 'Admin\EnquiryController@detailsDelete')->name('detailsDelete');
+        });
     });
 });
 
