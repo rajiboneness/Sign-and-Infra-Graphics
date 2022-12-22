@@ -77,6 +77,7 @@ Route::prefix('admin')->name('admin.')->group(function(){
             Route::get('/{id}/edit', 'Admin\EnquiryController@edit')->name('edit');
             Route::post('/{id}/update', 'Admin\EnquiryController@update')->name('update');
             Route::get('/{id}/delete', 'Admin\EnquiryController@destroy')->name('delete');
+            Route::get('/{id}/invoice', 'Admin\EnquiryController@invoice')->name('invoice');
             Route::post('/status', 'Admin\EnquiryController@status')->name('status');
             route::get('/{id}/detailsDelete', 'Admin\EnquiryController@detailsDelete')->name('detailsDelete');
         });

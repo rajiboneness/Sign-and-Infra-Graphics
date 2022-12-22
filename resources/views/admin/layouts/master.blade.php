@@ -228,6 +228,7 @@
     <script src="{{ asset('admin/js/main.js') }}"></script>
     <script src="{{ asset('admin/js/jquery.dataTables.min.js') }}"></script>
     <script src="{{ asset('admin/js/dataTables.bootstrap4.min.js') }}"></script>
+    <script src="https://monakanote.net/demo/js/printthis/js/printThis.js"></script>
     @yield('script')
 </body>
 

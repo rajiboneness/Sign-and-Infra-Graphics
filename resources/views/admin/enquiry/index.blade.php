@@ -23,6 +23,7 @@
                                     <th scope="col">Customer Name</th>
                                     <th scope="col">Enquiry Details</th>
                                     <th scope="col">Status</th>
+                                    <th scope="col">Invoice</th>
                                     <th scope="col">Date</th>
                                 </tr>
                             </thead>
@@ -61,6 +62,7 @@
                                                 // dd($enquiryDetails);
                                             @endphp
                                         </td>
+                                        
                                         <td> 
                                             @php
                                             if($value->status == 1){
@@ -105,6 +107,7 @@
                                                 </div>
                                             </div>
                                         </td>
+                                        <td><a href="{{ route('admin.enquiry.invoice', $value->id) }}" class="text-light badge bg-danger">Invoice</a></td>
                                         <td>
                                             {{date('d M Y', strtotime($value->created_at))}}
                                         </td>

@@ -763,7 +763,23 @@ body{
    .bg-primary {
         background-color: #050eeb !important;
     }
-
+    .customer_details{
+        font-weight: 700;
+        color: #222;
+    }
+    .enquiry_details table th{
+        background: #EEE;
+        font-weight: bold;
+        border-color: #BBB;
+        text-align: center;
+        border-radius: 0.25em;
+        border-width: 1px;
+        padding: 0.5em;
+        position: relative;
+    }
+    .form_header{
+        background: #f3f6f9;
+    }
     @media (max-width: 767px) {
         #enquiry_page .sign-content h3 {
             font-size: 40px;

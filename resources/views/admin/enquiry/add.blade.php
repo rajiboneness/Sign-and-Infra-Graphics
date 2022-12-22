@@ -78,7 +78,7 @@
                                                 </div>
                                             </div>
                                             <ul class="list-inline pull-right">
-                                                <li><button type="button" class="default-btn next-step">Continue to
+                                                <li><button type="button" class="default-btn next-step" id="Continue_btn">Continue to
                                                         next step</button></li>
                                             </ul>
                                         </div>
@@ -152,7 +152,17 @@
         </div>
     </div>
 </div>
-
+{{-- <div class="modal fade" id="AlertModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog AlertModal modal-dialog-centered modal-sm">
+        <div class="modal-content">
+            <div class="pb-4"><i class="fa fa-check" aria-hidden="true"></i></div>
+            <h3>Are You Sure ?</h3>
+            <div class="">
+            <a href="" class="btn btn-danger">Delete</a>
+            </div>
+        </div>
+    </div>
+</div> --}}
 @endsection
 @section('script')
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
@@ -249,6 +259,11 @@
             $("#search_table div").addClass('display');
             $("#search_data").val("");
         });
+
+        // $('#Continue_btn').on('click', function () {
+        //     $('#AlertModal').show();
+        //     return exit();
+        // });
     });
     // ------------step-wizard-------------
     $(document).ready(function () {

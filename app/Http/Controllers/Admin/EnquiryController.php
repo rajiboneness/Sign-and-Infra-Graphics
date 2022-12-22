@@ -84,6 +84,12 @@ class EnquiryController extends Controller
            return redirect()->route('admin.enquiry.index')->withInput($request->all());
         }
     }
+    public function invoice($id){
+        $Enquiry = Enquiry::findOrFail($id);
+        $details = $this->EnquiryRepository->GetEnquiryDetails($id);
+        // dd($details);
+        return view('admin.enquiry.invoice', compact('details', 'Enquiry'));
+    }
     public function status(Request $request){
         // dd($request->all());
         $data = $this->EnquiryRepository->toggleStatus($request);

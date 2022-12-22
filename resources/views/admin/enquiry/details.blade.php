@@ -11,31 +11,38 @@
                         <h4 class="text-center">Enquiry Details</h4>
                         <hr>
                     <div class="row">
-                        <div class="col-md-6">
-                            <ul>
-                                <li>Customer Name: {{ $Enquiry->name }}</li>
-                                <li> Email: {{ $Enquiry->email }}</li>
-                                <li> Mobile : {{ $Enquiry->phone }}</li>
-                                <li> Address : {{ $Enquiry->customers->address.', '.$Enquiry->customers->city.', '.$Enquiry->customers->state.', '.$Enquiry->customers->country.', '.$Enquiry->customers->pincode}}</li>
-                            </ul>
+                        <div class="col-md-3 customer_details">
+                            <span>Customer Id</span><br>
+                            <span>Name:</span><br>
+                            <span>Email:</span><br>
+                            <span>Mobile:</span><br>
+                            <span>Address:</span>
                         </div>
-                        <div class="col-md-6"></div>
+                        <div class="col-md-3">
+                            <span>{{ $Enquiry->customers->customer_code }}</span><br>
+                            <span>{{ $Enquiry->name }}</span><br>
+                            <span>{{ $Enquiry->email }}</span><br>
+                            <span>{{ $Enquiry->phone }}</span><br>
+                            <span>{{ $Enquiry->customers->address.', '.$Enquiry->customers->city.', '.$Enquiry->customers->state.', '.$Enquiry->customers->country.', '.$Enquiry->customers->pincode}}</span>
+                        </div>
+                        <div class="col-md-3"></div>
+                        <div class="col-md-3"></div>
                     </div>
                         <hr>
                     </div>
-                    <div class="row">
+                    <div class="row enquiry_details">
                         <div class="table-responsive">
                             <table class="table">
                                 <thead>
                                     <tr>
-                                        <th scope="col">#</th>
-                                        <th scope="col">Category</th>
-                                        <th scope="col">Service</th>
-                                        <th scope="col">Width</th>
-                                        <th scope="col">Height</th>
-                                        <th scope="col">Quantity</th>
-                                        <th scope="col">Rate</th>
-                                        <th scope="col">Amount</th>
+                                        <th>#</th>
+                                        <th>Category</th>
+                                        <th>Service</th>
+                                        <th>Width</th>
+                                        <th>Height</th>
+                                        <th>Quantity</th>
+                                        <th>Rate</th>
+                                        <th>Amount</th>
                                     </tr>
                                 </thead>
                                 <tbody>
