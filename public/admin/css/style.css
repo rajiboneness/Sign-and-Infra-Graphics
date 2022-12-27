@@ -414,6 +414,12 @@ body{
     padding: 15px;
     text-align: center;
 }
+.alertModal .modal-content{
+    padding: 15px;
+    text-align: center;
+    color: #222;
+    font-weight: 900;
+}
 .WrongAnswerModal .modal-content{
     padding: 15px;
     text-align: center;
@@ -425,6 +431,13 @@ body{
     background-color: #12b07f;
     color: #fff;
     padding: 11px;
+}
+.alertModal .modal-content i{
+    font-size: 29px;
+    border-radius: 50px;
+    background-color: #e25a67;
+    color: #fff;
+    padding: 17px;
 }
 .modal span{
     font-weight: 800;
@@ -729,7 +742,18 @@ body{
     #enquiry_page tr:nth-child(even) {
         background-color: #dddddd;
     }
-
+    #not_found1{
+        padding: 5px;
+        color: #f00;
+    }
+    #not_found{
+        padding: 5px;
+        color: #f00;
+    }
+    .borderless th{
+        border: 1px solid #ffffff !important;
+    }
+    
     #enquiry_page table i {
         width: 40px;
         height: 40px;
@@ -745,6 +769,12 @@ body{
         background-color: #ffffff;
     }
 
+    #search_Emp_table .display {
+        display: none;
+    }
+    .display{
+        display: none;
+    }
     #search_table .display {
         display: none;
     }
@@ -780,6 +810,9 @@ body{
     .form_header{
         background: #f3f6f9;
     }
+    .enquiry-tabs {
+        z-index: 1000!important;
+    }
     @media (max-width: 767px) {
         #enquiry_page .sign-content h3 {
             font-size: 40px;
@@ -788,4 +821,5 @@ body{
         #enquiry_page .wizard .nav-tabs>li a i {
             display: none;
         }
+        
     }

@@ -10,24 +10,39 @@
                         </div>
                         <h4 class="text-center">Enquiry Details</h4>
                         <hr>
-                    <div class="row">
-                        <div class="col-md-3 customer_details">
-                            <span>Customer Id</span><br>
-                            <span>Name:</span><br>
-                            <span>Email:</span><br>
-                            <span>Mobile:</span><br>
-                            <span>Address:</span>
+                        <div class="row">
+                            <div class="col-md-3 customer_details">
+                                <span>Customer Id</span><br>
+                                <span>Name:</span><br>
+                                <span>Email:</span><br>
+                                <span>Mobile:</span><br>
+                                <span>Address:</span>
+                            </div>
+                            <div class="col-md-3">
+                                <span>{{ $Enquiry->customers->customer_code }}</span><br>
+                                <span>{{ $Enquiry->name }}</span><br>
+                                <span>{{ $Enquiry->email }}</span><br>
+                                <span>{{ $Enquiry->phone }}</span><br>
+                                <span>{{ $Enquiry->customers->address.', '.$Enquiry->customers->city.', '.$Enquiry->customers->state.', '.$Enquiry->customers->country.', '.$Enquiry->customers->pincode}}</span>
+                            </div>
+                            <div class="col-md-3"></div>
+                            <div class="col-md-3"></div>
                         </div>
-                        <div class="col-md-3">
-                            <span>{{ $Enquiry->customers->customer_code }}</span><br>
-                            <span>{{ $Enquiry->name }}</span><br>
-                            <span>{{ $Enquiry->email }}</span><br>
-                            <span>{{ $Enquiry->phone }}</span><br>
-                            <span>{{ $Enquiry->customers->address.', '.$Enquiry->customers->city.', '.$Enquiry->customers->state.', '.$Enquiry->customers->country.', '.$Enquiry->customers->pincode}}</span>
+                        <hr>
+                        <div class="row">
+                            <div class="col-md-3 customer_details">
+                                <span>Employee Name</span><br>
+                                <span>Email:</span><br>
+                                <span>Mobile:</span><br>
+                            </div>
+                            <div class="col-md-3">
+                                <span>{{ $Enquiry->employees->fname.' '.$Enquiry->employees->lname }}</span><br>
+                                <span>{{ $Enquiry->employees->email }}</span><br>
+                                <span>{{ $Enquiry->employees->phone }}</span><br>
+                            </div>
+                            <div class="col-md-3"></div>
+                            <div class="col-md-3"></div>
                         </div>
-                        <div class="col-md-3"></div>
-                        <div class="col-md-3"></div>
-                    </div>
                         <hr>
                     </div>
                     <div class="row enquiry_details">

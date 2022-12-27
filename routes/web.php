@@ -31,6 +31,7 @@ Route::prefix('admin')->name('admin.')->group(function(){
         // Category
         Route::prefix('category')->name('category.')->group(function() {
             Route::get('/', 'Admin\CategoryController@index')->name('index');
+            Route::post('/getcatWiseService', 'Admin\CategoryController@getcatWiseService')->name('getcatWiseService');
             Route::post('/store', 'Admin\CategoryController@store')->name('store');
             Route::post('/{id}/update', 'Admin\CategoryController@update')->name('update');
             Route::get('/{id}/status', 'Admin\CategoryController@status')->name('status');
@@ -65,12 +66,15 @@ Route::prefix('admin')->name('admin.')->group(function(){
             Route::get('/{id}/status', 'Admin\EmployeeController@status')->name('status');
             Route::get('/{id}/delete', 'Admin\EmployeeController@destroy')->name('delete');
         });
+        Route::prefix('invoice')->name('invoice.')->group(function(){
+            Route::get('/', 'Admin\EnquiryController@allInvoice')->name('index');
+        });
         // Enquiry
-
         Route::prefix('enquiry')->name('enquiry.')->group(function(){
             Route::get('/', 'Admin\EnquiryController@index')->name('index');
             Route::get('/add', 'Admin\EnquiryController@add')->name('add');
             Route::post('/ajaxsearch', 'Admin\EnquiryController@ajaxsearch')->name('ajaxsearch');
+            Route::post('/employeesearch', 'Admin\EnquiryController@employeesearch')->name('employeesearch');
             Route::post('/category_wise_service', 'Admin\EnquiryController@category_wise_service')->name('category_wise_service');
             Route::post('/store', 'Admin\EnquiryController@store')->name('store');
             Route::get('/{id}/view', 'Admin\EnquiryController@view')->name('view');
@@ -80,6 +84,8 @@ Route::prefix('admin')->name('admin.')->group(function(){
             Route::get('/{id}/invoice', 'Admin\EnquiryController@invoice')->name('invoice');
             Route::post('/status', 'Admin\EnquiryController@status')->name('status');
             route::get('/{id}/detailsDelete', 'Admin\EnquiryController@detailsDelete')->name('detailsDelete');
+            Route::get('/{id}/invoice-store', 'Admin\EnquiryController@InvoiceStore')->name('invoice-store');
+            Route::post('/invoice-update', 'Admin\EnquiryController@InvoiceUpdate')->name('invoice-update');
         });
     });
 });

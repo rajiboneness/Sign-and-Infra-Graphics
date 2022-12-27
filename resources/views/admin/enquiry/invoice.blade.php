@@ -41,9 +41,9 @@ date_default_timezone_set('Asia/Calcutta');
                                 {{-- <p style="margin: 0;">Ph No: 9007015173</p> --}}
                             </td>
                             <td style="border:0px; vertical-align: top; width: 30%;">
-                                <p style="margin: 0;">Invoice Code: <strong> I1923CO000000429</strong></p>
-                                <p style="margin: 0;">Order By: <strong>{{ $Enquiry->name }}</strong></p>
-                                <p style="margin: 0;">PI. No: <strong> SIG/008/22-23</strong></p>
+                                {{-- <p style="margin: 0;">Invoice Code: <strong> I1923CO000000429</strong></p> --}}
+                                <p style="margin: 0;">Order By: <strong>{{ $Enquiry->enquiries->name }}</strong></p>
+                                <p style="margin: 0;">PI. No: <strong id="invoiceCode"> {{ $Enquiry->invoice_code }}</strong></p>
                             </td>
                             <td style="border:0px; vertical-align: top;text-align: end;border-right: 1px solid #fff;">
                                 <p style="margin: 0;">Invoice Date<br/><strong>{{ date('d M Y', strtotime(date('m/d/Y'))) }}</strong></p>
@@ -60,9 +60,9 @@ date_default_timezone_set('Asia/Calcutta');
                         </tr>
                         <tr style="border-bottom: 1px solid #fff;">
                             <td style="border: 0px;border-left: 1px solid #fff;">
-                                <p style="margin: 0;">Buyer: <br/><strong>{{ $Enquiry->name }}</strong><br/>{{ $Enquiry->customers->address.','.$Enquiry->customers->city.','.$Enquiry->customers->state }} </p>
+                                <p style="margin: 0;">Buyer: <br/><strong>{{ $Enquiry->enquiries->name }}</strong><br/>{{ $Enquiry->customers->address.','.$Enquiry->customers->city.','.$Enquiry->customers->state }} </p>
                                 <span>{{ $Enquiry->customers->country.','.$Enquiry->customers->pincode }}</span>
-                                <p style="margin: 0;">T : {{ $Enquiry->phone }}</p>
+                                <p style="margin: 0;">T : {{ $Enquiry->enquiries->phone }}</p>
                                 {{-- <p style="margin: 0;">E : {{ $Enquiry->email }}</p> --}}
                             </td>
                             <td style="border: 0px;">
@@ -139,7 +139,7 @@ date_default_timezone_set('Asia/Calcutta');
                             <td style="border-left: 0px;border-right:0px;text-align:center;border-bottom: 0px;border-top:0px;padding: 2px;border-right: 1px solid #808080;"></td>
                             <td align="right" style="border-top: 0px;border-bottom:0px;padding: 2px;border-right: 1px solid #808080;"></td>
                             <td align="right" style="border-top: 0px;border-bottom:0px;padding: 2px;border-right: 1px solid #808080;border-top: 1px solid #808080;">
-                                IGST <span id="hiddengst" class="d-none"> </span><input type="text" id="gst_amount" onkeypress="return onlyNumberKey(event)" style="width: 27px; padding:0px;text-align:center;" value="">%</td>
+                                SGST <span id="hiddengst" class="d-none"> 0</span><input type="text" id="gst_amount" onkeypress="return onlyNumberKey(event)" style="width: 27px; padding:0px;text-align:center;" value="">%</td>
                             <td align="right"style="border-top: 0px;border-bottom:0px;padding: 2px;border-right: 1px solid #fff;border-top: 1px solid #808080;" id="amountGST"></td>
                         </tr>
                         <tr>
@@ -150,14 +150,14 @@ date_default_timezone_set('Asia/Calcutta');
                             @php
                             $floatquantity = array_sum($totalquantity);
                             @endphp
-                            <td align="right" style="border-left: 0px;border-top: 1px solid #808080;padding: 2px;border-right: 1px solid #808080;">{{ $floatquantity }}</td>
+                            <td align="right" id="totalQuantity" style="border-left: 0px;border-top: 1px solid #808080;padding: 2px;border-right: 1px solid #808080;">{{ $floatquantity }}</td>
                             <td align="right" style="border-top: 1px solid #808080;padding: 2px;border-right: 1px solid #808080;">Round Off</td>
                             <td align="right"style="padding: 2px;border-right: 1px solid #fff;border-top: 1px solid #808080;"></td>
                         </tr>
                         <tr>
                             <td colspan="5" style="border-left: 1px solid #fff;border-top: 1px solid #808080;border-right: 1px solid #808080; border-bottom: 1px solid #808080;">Payment Terms: Against Delivery</td>
                             <td align="right" style="padding-right: 2px;border-right: 1px solid #808080;border-top: 1px solid #808080;border-bottom: 1px solid #808080;"><strong>Grand Total</strong></td>
-                            <td align="right"style="padding-right: 2px;border-top: 1px solid #808080;border-right: 1px solid #fff;border-bottom: 1px solid #808080;"><strong id="grand_total">{{ number_format($floatAmount, 2) }}</strong></td>
+                            <td align="right" id="grandTotal" style="padding-right: 2px;border-top: 1px solid #808080;border-right: 1px solid #fff;border-bottom: 1px solid #808080;"><strong id="grand_total">{{ number_format($floatAmount, 2) }}</strong></td>
                         </tr>
                     </table>
                 </td>
@@ -210,6 +210,8 @@ date_default_timezone_set('Asia/Calcutta');
                 </td>
             </tr>
         </table>
+        <input type="hidden" name="totalitems" id="totalitems" value="{{ count($details) }}">
+        <input type="hidden" name="enquiry_id" id="enquiry_id" value="{{ $Enquiry->id }}">
     </div>
 @endsection
 @section('script')
@@ -224,7 +226,32 @@ date_default_timezone_set('Asia/Calcutta');
         $('#print_btn').click(function(){
             $('#gst_amount').css('display', 'none');
             $('#hiddengst').removeClass('d-none');
-            $('#invoice_table').printThis();
+            var gst = $('#hiddengst').text();
+            var quantity = $('#totalQuantity').text();
+            var invoiceCode = $('#invoiceCode').text();
+            var grandTotal = $('#grandTotal').text();
+            var totalitems = $('#totalitems').val();
+            var enquiry_id = $('#enquiry_id').val();
+            $.ajax({
+                url: "{{ route('admin.enquiry.invoice-update') }}",
+                type: "POST",
+                data: { 
+                    _token: '{{ csrf_token() }}',
+                    gst : gst,
+                    quantity : quantity,
+                    invoiceCode : invoiceCode,
+                    grandTotal : grandTotal,
+                    totalitems : totalitems,
+                    enquiry_id : enquiry_id
+                },
+                success: function(response){
+                    if(response.status ==200){
+                    $('#invoice_table').printThis();
+                    }
+                }
+            });
+
+            
         });
     });
     $(document).ready(function () {

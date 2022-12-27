@@ -10,35 +10,136 @@
                             <div class="wizard">
                                 <div class="wizard-inner">
                                     <div class="connecting-line"></div>
-                                    <ul class="nav nav-tabs" role="tablist">
+                                    <ul class="nav nav-tabs enquiry-tabs" role="tablist">
                                         <li role="presentation" class="active">
                                             <a href="#step1" data-toggle="tab" aria-controls="step1" role="tab"
-                                                aria-expanded="true"><span class="round-tab">1 </span> <i>Customer
+                                                aria-expanded="false"><span class="round-tab">1</span> <i> Employee
+                                                    Details</i></a>
+                                        </li>
+                                        <li role="presentation" class="disabled">
+                                            <a href="#step2" data-toggle="tab" aria-controls="step2" role="tab"
+                                                aria-expanded="true"><span class="round-tab">2 </span> <i>Customer
                                                     Details</i>
                                             </a>
                                         </li>
                                         <li role="presentation" class="disabled">
-                                            <a href="#step2" data-toggle="tab" aria-controls="step2" role="tab"
-                                                aria-expanded="false"><span class="round-tab">2</span> <i> Measurement
+                                            <a href="#step3" data-toggle="tab" aria-controls="step3" role="tab"
+                                                aria-expanded="false"><span class="round-tab">3</span> <i> Measurement
                                                     Details</i></a>
                                         </li>
                                     </ul>
                                 </div>
-
+                                <div class="customer_records row pt-2 d-none">
+                                    <div class="col-md input_field_width">
+                                        <div class="form-group">
+                                            <select name="category[]" id="category0" class="form-control category" onchange="makeSubmenu(this.value, this.id)">
+                                                <option value="" disabled selected>Choose Category</option>
+                                                @foreach($Category as $catdata)
+                                                <option value="{{ $catdata->id}}">{{ $catdata->name }}
+                                                </option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md input_field_width">
+                                        <div class="form-group">
+                                            <select name="service[]" id="service0" class="form-control citySelect">
+                                                <option value="" class="selectService">Select Category.</option>
+                                            </select>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <input class="form-control" type="number" name="width[]"
+                                                placeholder="Width">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <input class="form-control" type="number" name="height[]"
+                                                placeholder="Height">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <input class="form-control" type="text" name="quantity[]"
+                                                placeholder="Quantity">
+                                        </div>
+                                    </div>
+                                    <div class="col-md-2">
+                                        <div class="form-group">
+                                            <input class="form-control" type="number" name="rate[]"
+                                                placeholder="Rate">
+                                        </div>
+                                    </div>
+                                </div>
                                 <form method="post" action="{{ route('admin.enquiry.store') }}" class="login-box">
                                     @csrf
                                     <div class="tab-content" id="main_form">
                                         <div class="tab-pane active" role="tabpanel" id="step1">
-                                            <h4 class="text-center">Step 1</h4>
+                                            <h4 class="text-center">Employee</h4>
+                                            <div class="row search_row">
+                                                <input type="text" class="search form-control"
+                                                    placeholder="Search By Employee Name or Mobile Number" name="search"
+                                                    id="search_Emp_data">
+                                                <div id="search_Emp_table" class="search_Emp_table">
+                                                    <div>
+                                                        <table class="table borderless">
+                                                            <tr>
+                                                                <th class="user_icon1"></th>
+                                                                <th><span id="search_Emp_name"></span></th>
+                                                                <th><span id="search_Emp_email"></span></th>
+                                                                <th><span id="search_Emp_phone"></span></th>
+                                                            </tr>
+                                                        </table>
+                                                    </div>
+                                                    <input type="hidden" id="employee_id" name="employee_id" value="">
+                                                </div>
+                                                <div id="not_found1">
+                                                </div>
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-md-12">
+                                                    <div class="form-group">
+                                                        <label>Employee Name</label>
+                                                        <input class="form-control" type="text" name="EmpName"
+                                                            id="EmpName" placeholder="">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <div class="row pt-4">
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Phone Number *</label>
+                                                        <input class="form-control" type="number" name="EmpPhone"
+                                                            id="EmpPhone" placeholder="">
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-6">
+                                                    <div class="form-group">
+                                                        <label>Email Address *</label>
+                                                        <input class="form-control" type="email" name="EmpEmail"
+                                                            id="EmpEmail" placeholder="">
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            <ul class="list-inline pull-right">
+                                                <li><button type="button" class="default-btn next-step" id="Continue_Emp_btn">Continue to
+                                                        next step</button></li>
+                                            </ul>
+                                        </div>
+                                        <div class="tab-pane" role="tabpanel" id="step2">
+                                            <h4 class="text-center">Customer</h4>
                                             <div class="row search_row">
                                                 <input type="text" class="search form-control"
                                                     placeholder="Search By Customer Name or Mobile Number" name="search"
                                                     id="search_data">
-                                                <div id="search_table">
+                                                <div id="search_table" class="search_table">
                                                     <div>
-                                                        <table class="table table-borderless">
+                                                        <table class="table borderless">
                                                             <tr>
-                                                                <th id="user_icon"></th>
+                                                                <th class="user_icon"></th>
                                                                 <th><span id="search_name"></span></th>
                                                                 <th><span id="search_email"></span></th>
                                                                 <th><span id="search_phone"></span></th>
@@ -65,7 +166,7 @@
                                                 <div class="col-md-6">
                                                     <div class="form-group">
                                                         <label>Phone Number *</label>
-                                                        <input class="form-control" type="text" name="customer_phone"
+                                                        <input class="form-control" type="number" name="customer_phone"
                                                             id="cphone" placeholder="">
                                                     </div>
                                                 </div>
@@ -78,17 +179,19 @@
                                                 </div>
                                             </div>
                                             <ul class="list-inline pull-right">
-                                                <li><button type="button" class="default-btn next-step" id="Continue_btn">Continue to
+                                                <li><button type="button" class="default-btn prev-step">Back</button>
+                                                </li>
+                                                <li><button type="button" class="default-btn next-step" id="Continue_cust_btn">Continue to
                                                         next step</button></li>
                                             </ul>
                                         </div>
-                                        <div class="tab-pane" role="tabpanel" id="step2">
-                                            <h4 class="text-center">Step 2</h4>
-                                            <div class="customer_records row pt-2">
+                                        <div class="tab-pane" role="tabpanel" id="step3">
+                                            <h4 class="text-center">Measurement</h4>
+                                            <div class="row pt-2">
                                                 <div class="col-md input_field_width">
                                                     <div class="form-group">
-                                                        <select name="category[]" id="category" class="form-control">
-                                                            <option value="">Select Category...</option>
+                                                        <select name="category[]" id="category20" class="form-control category" onchange="makeSubmenu(this.value, this.id)">
+                                                            <option value="" disabled selected>Choose Category</option>
                                                             @foreach($Category as $catdata)
                                                             <option value="{{ $catdata->id}}">{{ $catdata->name }}
                                                             </option>
@@ -98,12 +201,8 @@
                                                 </div>
                                                 <div class="col-md input_field_width">
                                                     <div class="form-group">
-                                                        <select name="service[]" id="service" class="form-control">
-                                                            <option value="">Select Service...</option>
-                                                            @foreach($Service as $serdata)
-                                                            <option value="{{ $serdata->id}}">{{ $serdata->name }}
-                                                            </option>
-                                                            @endforeach
+                                                        <select name="service[]" id="service20" class="form-control citySelect">
+                                                            <option value="" class="selectService">Select Category.</option>
                                                         </select>
                                                     </div>
                                                 </div>
@@ -152,35 +251,119 @@
         </div>
     </div>
 </div>
-{{-- <div class="modal fade" id="AlertModal" tabindex="-1" aria-hidden="true">
-    <div class="modal-dialog AlertModal modal-dialog-centered modal-sm">
+<div class="modal fade" id="AlertModal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog alertModal modal-dialog-centered modal-sm">
         <div class="modal-content">
-            <div class="pb-4"><i class="fa fa-check" aria-hidden="true"></i></div>
-            <h3>Are You Sure ?</h3>
-            <div class="">
-            <a href="" class="btn btn-danger">Delete</a>
-            </div>
+            <div class="pb-4"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i></div>
+            <p id="alert_content">Are You Sure ?</p>
         </div>
     </div>
-</div> --}}
+</div>
 @endsection
 @section('script')
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
-<script>
-// Add Multiple Dynamic Input fields
-    $('.extra-fields-customer').click(function () {
-        $('.customer_records').clone().appendTo('.customer_records_dynamic');
-        $('.customer_records_dynamic .customer_records').addClass('single row');
-        $('.single .extra-fields-customer').remove();
-        $('.single').append('<div class="col-auto remove-field"><a href="#" class="btn-remove-customer btn btn-danger"><i class="fa fa-minus" aria-hidden="true"></i></a></div>');
-        $('.customer_records_dynamic > .single').attr("class", "row pt-3");
 
-        $('.customer_records_dynamic input').each(function () {
-            var count = 0;
-            var fieldname = $(this).attr("name");
-            $(this).attr('name', fieldname + count);
-            count++;
-        });
+ 
+<script>
+
+    $('#Continue_Emp_btn').on('click', function () {
+        if($('#EmpName').val() == ''){
+            $('#alert_content').text('Please enter employee name !');
+            $('#AlertModal').modal('show')
+            return exit();
+        }else if($('#EmpPhone').val() == ''){
+            $('#alert_content').text('Please enter employee mobile !');
+            $('#AlertModal').modal('show')
+            return exit();
+        }else if($('#EmpEmail').val() == ''){
+            $('#alert_content').text('Please enter employee email !');
+            $('#AlertModal').modal('show')
+            return exit();
+        }
+        else{
+        }
+    });
+    $('#Continue_cust_btn').on('click', function () {
+        if($('#cname').val() == ''){
+            $('#alert_content').text('Please enter customer name !');
+            $('#AlertModal').modal('show')
+            return exit();
+        }else if($('#cphone').val() == ''){
+            $('#alert_content').text('Please enter customer mobile !');
+            $('#AlertModal').modal('show')
+            return exit();
+        }else if($('#cemail').val() == ''){
+            $('#alert_content').text('Please enter customer email !');
+            $('#AlertModal').modal('show')
+            return exit();
+        }
+        else{
+            var active = $('.wizard .nav-tabs li.active');
+            active.next().removeClass('disabled');
+            nextTab(active);
+        }
+    });
+    function makeSubmenu(value, id) {
+        var lastChar = id.substring(8);
+        if (value.length == 0){
+            if(lastChar == 0){
+                document.querySelector(`service${lastChar}`).innerHTML = "<option></option>";
+            }else{
+                document.querySelector(`service${lastChar}`).innerHTML = "<option></option>";
+            }
+        }else{
+            var category_id = value;
+            $.ajax({
+                url: "{{ route('admin.category.getcatWiseService') }}",
+                method: 'post',
+                data: {
+                    category_id: category_id,
+                    _token: "{{ csrf_token() }}",
+                },
+                success: function (response) {
+                    if (response.status == 200) {
+                        var array = response.data;
+                        if(lastChar == 0){
+                            $(`#service${lastChar} option`).remove();
+                            $(`#service${lastChar}`).append('<option value="">Select Service...</option>');
+                            $.each(array, function(index, value) {
+                                $(`#service${lastChar}`).append('<option value="' + value[0] + '">' + value[1] + "</option>");
+                            });
+                        }else{
+                            $(`#service${lastChar} option`).remove();
+                            $(`#service${lastChar}`).append('<option value="">Select Service...</option>');
+                            $.each(array, function(index, value) {
+                                $(`#service${lastChar}`).append('<option value="' + value[0] + '">' + value[1] + "</option>");
+                            });
+                        }
+                    }else{
+
+                    }
+                }
+            });
+        }
+    }
+    
+// Add Multiple Dynamic Input fields
+
+    var sl = 1;
+    $('.extra-fields-customer').click(function () {
+        // for(var i=1;i>number;i++){
+            $('.customer_records').clone().appendTo('.customer_records_dynamic');
+            $('.customer_records_dynamic .customer_records').addClass('single row');
+            $('.single .extra-fields-customer').remove();
+            $('.single').append(`<div class="col-auto remove-field"><a href="#" class="btn-remove-customer btn btn-danger"><i class="fa fa-minus" aria-hidden="true"></i></a></div>`);
+            $('.customer_records_dynamic > .single').attr("class", "row pt-3");
+            $('.customer_records_dynamic input').each(function () {
+                var count = 0;
+                var fieldname = $(this).attr("name");
+                $(this).attr('name', fieldname + count);
+                count++;
+            });
+            $(`#category${sl-1}`).attr("id",  `category${sl++}`);
+            var service = parseInt(sl-1);
+            $(`#service${service-1}`).attr("id",  `service${service}`);
+        // }
     });
     $(document).on('click', '.remove-field', function (e) {
         $(this).parent('.row').remove();
@@ -188,31 +371,52 @@
         e.preventDefault();
     });
 
-
-    // $(document).ready(function() {
-    // $('#category').on('change', function() {
-    //     var category_id = $('#category').val();
-    //     $.ajax({
-    //         url: "{{ route('admin.enquiry.category_wise_service') }}",
-    //         method: 'POST',
-    //         data: {
-    //             category_id: category_id,
-    //             _token: "{{ csrf_token() }}",
-    //         },
-    //         success: function (data) {
-    //             if (data.status == 200) {
-
-    //             }else{
-
-    //             }
-    //         }
-    //     });
-    // });
+    $(document).ready(function () {
+        $("#search_Emp_data").keyup(function () {
+            var search = $('#search_Emp_data').val.length
+            if (search == 0) {
+                $(".search_Emp_table").addClass('display');
+                $('#not_found1').addClass('display');
+            }
+            var query = $('#search_Emp_data').val();
+            if (query != "") {
+                $.ajax({
+                    url: "{{ route('admin.enquiry.employeesearch') }}",
+                    method: 'POST',
+                    data: {
+                        query: query,
+                        _token: "{{ csrf_token() }}",
+                    },
+                    success: function (data) {
+                        if (data.status == 200) {
+                            $('#not_found1').addClass('display');
+                            $('#not_found1').text('');
+                            $(".search_Emp_table").removeClass('display');
+                            $('.user_icon1').html(
+                                '<i class="fa fa-user d-flex justify-content-center align-items-center fa-lg"></i>'
+                                );
+                            $('#search_Emp_name').text(data.employee_name);
+                            $('#search_Emp_email').text(data.email);
+                            $('#search_Emp_phone').text(data.phone);
+                            // $('#customer_code').val(data.customer_code);
+                            $('#employee_id').val(data.id);
+                            $('#not_found1').css('display', 'none');
+                        } else {
+                            $('.search_Emp_table').addClass('display');
+                            $('#not_found1').removeClass('display');
+                            $('#not_found1').text(data.message);
+                        }
+                    }
+                });
+            }
+        });
+    });
     $(document).ready(function () {
         $("#search_data").keyup(function () {
             var search = $('#search_data').val.length
             if (search == 0) {
-                $("#search_table").hide();
+                $(".search_table").addClass('display');
+                $('#not_found').addClass('display');
             }
             var query = $('#search_data').val();
             if (query != "") {
@@ -225,8 +429,10 @@
                     },
                     success: function (data) {
                         if (data.status == 200) {
-                            $("#search_table div").removeClass('display');
-                            $('#user_icon').html(
+                            $('#not_found').addClass('display');
+                            $('#not_found').text('');
+                            $(".search_table").removeClass('display');
+                            $('.user_icon').html(
                                 '<i class="fa fa-user d-flex justify-content-center align-items-center fa-lg"></i>'
                                 );
                             $('#search_name').text(data.customer_name);
@@ -236,8 +442,9 @@
                             $('#customer_id').val(data.id);
                             $('#not_found').css('display', 'none');
                         } else {
-                            $('#search_table').css('display', 'none');
-                            $('#not_found').text('data.message');
+                            $('.search_table').addClass('display');
+                            $('#not_found').removeClass('display');
+                            $('#not_found').text(data.message);
                         }
                     }
                 });
@@ -245,6 +452,19 @@
         });
     });
 
+    $(document).ready(function () {
+        $('#search_Emp_table').on('click', function () {
+            let employee_id = $('#employee_id').val();
+            let search_Emp_name = $('#search_Emp_name').html();
+            let search_Emp_email = $('#search_Emp_email').html();
+            let search_Emp_phone = $('#search_Emp_phone').html();
+            $('#EmpName').val(search_Emp_name);
+            $('#EmpPhone').val(search_Emp_phone);
+            $('#EmpEmail').val(search_Emp_email);
+            $("#search_Emp_table div").addClass('display');
+            $("#search_Emp_data").val("");
+        });
+    });
     $(document).ready(function () {
         $('#search_table').on('click', function () {
             let customer_id = $('#customer_id').val();
@@ -259,12 +479,8 @@
             $("#search_table div").addClass('display');
             $("#search_data").val("");
         });
-
-        // $('#Continue_btn').on('click', function () {
-        //     $('#AlertModal').show();
-        //     return exit();
-        // });
     });
+    
     // ------------step-wizard-------------
     $(document).ready(function () {
         $('.nav-tabs > li a[title]').tooltip();

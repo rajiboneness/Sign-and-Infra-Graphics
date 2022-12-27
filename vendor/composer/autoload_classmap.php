@@ -43,6 +43,7 @@ return array(
     'App\\Models\\Employee' => $baseDir . '/app/Models/Employee.php',
     'App\\Models\\Enquiry' => $baseDir . '/app/Models/Enquiry.php',
     'App\\Models\\EnquiryDetail' => $baseDir . '/app/Models/EnquiryDetail.php',
+    'App\\Models\\Invoice' => $baseDir . '/app/Models/Invoice.php',
     'App\\Models\\Service' => $baseDir . '/app/Models/Service.php',
     'App\\Providers\\AppServiceProvider' => $baseDir . '/app/Providers/AppServiceProvider.php',
     'App\\Providers\\AuthServiceProvider' => $baseDir . '/app/Providers/AuthServiceProvider.php',

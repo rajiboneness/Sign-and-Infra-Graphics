@@ -23,7 +23,7 @@
                                     <th scope="col">Customer Name</th>
                                     <th scope="col">Enquiry Details</th>
                                     <th scope="col">Status</th>
-                                    <th scope="col">Invoice</th>
+                                    <th scope="col">Quotation</th>
                                     <th scope="col">Date</th>
                                 </tr>
                             </thead>
@@ -107,7 +107,25 @@
                                                 </div>
                                             </div>
                                         </td>
-                                        <td><a href="{{ route('admin.enquiry.invoice', $value->id) }}" class="text-light badge bg-danger">Invoice</a></td>
+                                        <td>
+                                            @if($value->quotation ==1)
+                                            <a href="{{ route('admin.enquiry.invoice', $value->id) }}" class="text-light badge bg-success">Quotation</a>
+                                            @else
+                                            <a href="javascript:void(0)" class="text-light badge bg-danger" data-bs-toggle="modal" data-bs-target="#InvoiceModal{{ $key+1 }}">Generate Invoice</a>
+                                            {{-- generate Invoice --}}
+                                            <div class="modal fade" id="InvoiceModal{{ $key+1 }}" tabindex="-1" aria-hidden="true">
+                                                <div class="modal-dialog deleteModal modal-dialog-centered modal-sm">
+                                                    <div class="modal-content">
+                                                        <div class="pb-4"><i class="fa fa-check" aria-hidden="true"></i></div>
+                                                        <h3>Are You Sure ?</h3>
+                                                        <div class="">
+                                                        <a href="{{ route('admin.enquiry.invoice-store', $value->id) }}" class="btn btn-danger">Generate</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            @endif
+                                        </td>
                                         <td>
                                             {{date('d M Y', strtotime($value->created_at))}}
                                         </td>

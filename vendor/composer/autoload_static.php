@@ -500,6 +500,7 @@ class ComposerStaticInit9bff46780cb0d65192c904fc0ebcb0af
         'App\\Models\\Employee' => __DIR__ . '/../..' . '/app/Models/Employee.php',
         'App\\Models\\Enquiry' => __DIR__ . '/../..' . '/app/Models/Enquiry.php',
         'App\\Models\\EnquiryDetail' => __DIR__ . '/../..' . '/app/Models/EnquiryDetail.php',
+        'App\\Models\\Invoice' => __DIR__ . '/../..' . '/app/Models/Invoice.php',
         'App\\Models\\Service' => __DIR__ . '/../..' . '/app/Models/Service.php',
         'App\\Providers\\AppServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AppServiceProvider.php',
         'App\\Providers\\AuthServiceProvider' => __DIR__ . '/../..' . '/app/Providers/AuthServiceProvider.php',

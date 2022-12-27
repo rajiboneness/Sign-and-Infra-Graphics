@@ -16,7 +16,6 @@
                         <div class="row">
                             {{-- <p class="form_header"><strong>Personal Details</strong></p> --}}
                             <div class="mb-3 col-12 col-md-6">
-                                
                                 <label for="" class="form-label">First Name <span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" id="fname" name="fname" value="{{old('fname')}}">
                                 @error('fname') <p class="small text-danger">{{ $message }}</p> @enderror

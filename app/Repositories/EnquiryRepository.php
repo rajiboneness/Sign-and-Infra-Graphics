@@ -6,7 +6,9 @@ use App\Interfaces\EnquiryInterface;
 use App\Models\Enquiry;
 use App\Models\Customer;
 use App\Models\Service;
+use App\Models\Invoice;
 use App\Models\EnquiryDetail;
+use App\Models\Employee;
 use Illuminate\Http\UploadedFile;
 use DB;
 
@@ -23,6 +25,14 @@ class EnquiryRepository implements EnquiryInterface
         ->orWhere('customer_code', 'like', $query . '%')->first();
         return $data;
     }
+    public function EmployeeDataSearch($query)
+    {
+        $data = Employee::orWhere('fname', 'like', $query . '%')
+        ->orWhere('lname', 'like',  $query . '%')
+        ->orWhere('email', 'like', $query . '%')
+        ->orWhere('phone', 'like', $query . '%')->first();
+        return $data;
+    }
     public function CatWistService($category_id){
         $data = Service::findOrFail($category_id);
     }
@@ -33,9 +43,10 @@ class EnquiryRepository implements EnquiryInterface
         $store->name = $collection['customer_name'];
         $store->email = $collection['customer_email'];
         $store->phone = $collection['customer_phone'];
-        // $store->category_id = $collection['category'];
-        // $store->service_id = $collection['service'];
-        // $store->width = $collection['width'];
+        $store->employee_id = $collection['employee_id'];
+        $store->emp_name = $collection['EmpName'];
+        $store->emp_phone = $collection['EmpPhone'];
+        $store->emp_email = $collection['EmpEmail'];
         // $store->height = $collection['height'];
         $store->save();
         $categories = $collection['category'];
@@ -56,11 +67,15 @@ class EnquiryRepository implements EnquiryInterface
     }
     public function EnqueryUpdateData($id, array $arraydata){
         $collection = collect($arraydata);
-        // dd($collection);
         $update = Enquiry::findOrFail($id);
         $update->name = $collection['customer_name'];
         $update->email = $collection['customer_email'];
         $update->phone = $collection['customer_phone'];
+        $update->customer_id = $collection['customer_id'];
+        $update->employee_id = $collection['employee_id'];
+        $update->emp_name = $collection['emp_name'];
+        $update->emp_phone = $collection['emp_phone'];
+        $update->emp_email = $collection['emp_email'];
         $update->save();
         $category_new = $collection['category_new'];
         // dd($category_new);
@@ -119,6 +134,22 @@ class EnquiryRepository implements EnquiryInterface
     }
     public function GetEnquiryDetails($id){
         return EnquiryDetail::where('enquiry_id', $id)->get();
+    }
+    public function InvoiceStoreData(array $Enquiry){
+        $collection = collect($Enquiry);
+        $updateInvoice = Invoice::where('invoice_code', $collection['invoiceCode'])->first();
+        $updateInvoice->items = $collection['totalitems'];
+        $updateInvoice->quantity = $collection['quantity'];
+        $updateInvoice->gst = $collection['gst'];
+        $updateInvoice->total_amount = $collection['grandTotal'];
+        $updateInvoice->save();
+        return $updateInvoice;
+    }
+
+    // Invoice Management
+
+    public function GetAllInvoice(){
+        return Invoice::latest('id')->get();
     }
    
 }

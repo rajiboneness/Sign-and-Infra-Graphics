@@ -17,7 +17,7 @@
                                     <div class="customer_records_edit row pt-2 d-none">
                                         <div class="col-md input_field_width">
                                             <div class="form-group">
-                                                <select name="category_new[]" id="" class="form-control">
+                                                <select name="category_new[]" id="category0" class="form-control" onchange="makeSubmenu(this.value, this.id)">
                                                     <option value="">Select Category...</option>
                                                     @foreach($Category as $catdata)
                                                     <option value="{{ $catdata->id}}">{{ $catdata->name }}
@@ -28,7 +28,7 @@
                                         </div>
                                         <div class="col-md input_field_width">
                                             <div class="form-group">
-                                                <select name="service_new[]" class="form-control">
+                                                <select name="service_new[]" class="form-control" id="service0">
                                                     <option value="">Select Service...</option>
                                                     @foreach($Service as $serdata)
                                                     <option value="{{ $serdata->id}}">{{ $serdata->name }}
@@ -62,17 +62,74 @@
                                             </div>
                                         </div>
                                     </div>
-                                        <h4 class="text-center">Step 1</h4>
+                                        <h4 class="text-center">Employee Details</h4>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label>Employee Name</label>
+                                                    <input class="form-control" type="text" name="emp_name"
+                                                        id="emp_name" placeholder="" value="{{ $Enquiry->emp_name }}" >
+                                                        <div id="search_Emp_table" class="search_Emp_table">
+                                                            <div>
+                                                                <table class="table borderless">
+                                                                    <tr>
+                                                                        <th class="user_icon1"></th>
+                                                                        <th><span id="search_Emp_name"></span></th>
+                                                                        <th><span id="search_Emp_email"></span></th>
+                                                                        <th><span id="search_Emp_phone"></span></th>
+                                                                    </tr>
+                                                                </table>
+                                                            </div>
+                                                        </div>
+                                                        <div id="not_found1">
+                                                        </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row pt-2">
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Phone Number *</label>
+                                                    <input class="form-control" type="text" name="emp_phone"
+                                                        id="emp_phone" placeholder="" value="{{ $Enquiry->emp_phone }}">
+                                                </div>
+                                            </div>
+                                            <div class="col-md-6">
+                                                <div class="form-group">
+                                                    <label>Email Address *</label>
+                                                    <input class="form-control" type="email" name="emp_email"
+                                                        id="emp_email" placeholder="" value="{{ $Enquiry->emp_email }}">
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <h4 class="text-center mt-4">Customer Details</h4>
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="form-group">
                                                     <label>Customer Name</label>
                                                     <input class="form-control" type="text" name="customer_name"
                                                         id="cname" placeholder="" value="{{ $Enquiry->name }}">
+                                                    <div id="search_table" class="search_table">
+                                                        <div>
+                                                            <table class="table borderless">
+                                                                <tr>
+                                                                    <th class="user_icon"></th>
+                                                                    <th><span id="search_name"></span></th>
+                                                                    <th><span id="search_email"></span></th>
+                                                                    <th><span id="search_phone"></span></th>
+                                                                </tr>
+                                                            </table>
+                                                        </div>
+                                                        <input type="hidden" name="customer_code" id="customer_code">
+                                                    </div>
+                                                    <div id="not_found">
+                                                    </div>
                                                 </div>
                                             </div>
                                         </div>
-                                        <div class="row pt-4">
+                                        <input type="hidden" name="customer_id" id="customer_id" value="{{ $Enquiry->customer_id }}">
+                                        <input type="hidden" name="employee_id"  id="employee_id" value="{{ $Enquiry->employee_id }}">
+                                        <div class="row pt-2">
                                             <div class="col-md-6">
                                                 <div class="form-group">
                                                     <label>Phone Number *</label>
@@ -89,13 +146,14 @@
                                             </div>
                                         </div>
                                         <br>
-                                        <h4 class="text-center">Step 2</h4>
+                                        <h4 class="text-center">Measurement Details</h4>
+                                        {{-- <input type="hidden" id="details" value="{{ count($details) }}"> --}}
                                         @foreach($details as $key =>$data)
                                             <div class="customer_records row pt-2">
                                                 <div class="col-md input_field_width">
                                                     <input type="hidden" name="enquiry_details_id[]" value="{{ $data->id }}">
                                                     <div class="form-group">
-                                                        <select name="category[]" id="category" class="form-control">
+                                                        <select name="category[]" id="category{{ $key+100 }}" class="form-control" onchange="makeSubmenu(this.value, this.id)">
                                                             <option value="">Select Category...</option>
                                                             @foreach($Category as $catdata)
                                                             <option value="{{ $catdata->id}}" {{ $data->category_id == $catdata->id ? 'selected' : ''}}>{{ $catdata->name }}
@@ -106,7 +164,7 @@
                                                 </div>
                                                 <div class="col-md input_field_width">
                                                     <div class="form-group">
-                                                        <select name="service[]" id="service" class="form-control">
+                                                        <select name="service[]" id="service{{ $key+100 }}" class="form-control">
                                                             <option value="">Select Service...</option>
                                                             @foreach($Service as $serdata)
                                                             <option value="{{ $serdata->id}}" {{ $data->service_id == $serdata->id ? 'selected' : ''}}>{{ $serdata->name }}
@@ -168,7 +226,156 @@
 @section('script')
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <script>
+    $(document).ready(function () {
+        $("#emp_name").keyup(function () {
+            var search = $('#emp_name').val.length
+            if (search == 0) {
+                $(".search_Emp_table").addClass('display');
+                $('#not_found1').addClass('display');
+            }
+            var query = $('#emp_name').val();
+            if (query != "") {
+                $.ajax({
+                    url: "{{ route('admin.enquiry.employeesearch') }}",
+                    method: 'POST',
+                    data: {
+                        query: query,
+                        _token: "{{ csrf_token() }}",
+                    },
+                    success: function (data) {
+                        if (data.status == 200) {
+                            $('#not_found1').addClass('display');
+                            $('#not_found1').text('');
+                            $(".search_Emp_table").removeClass('display');
+                            // $("#search_Emp_table div").removeClass('display');
+                            $('.user_icon1').html(
+                                '<i class="fa fa-user d-flex justify-content-center align-items-center fa-lg"></i>'
+                                );
+                            $('#search_Emp_name').text(data.employee_name);
+                            $('#search_Emp_email').text(data.email);
+                            $('#search_Emp_phone').text(data.phone);
+                            // $('#customer_code').val(data.customer_code);
+                            $('#employee_id').val(data.id);
+                            
+                        } else {
+                            // $('#search_Emp_table').css('display', 'none');
+                            $('.search_Emp_table').addClass('display');
+                            $('#not_found1').removeClass('display');
+                            $('#not_found1').text(data.message);
+                        }
+                    }
+                });
+            }
+        });
+    });
+    $(document).ready(function () {
+        $('#search_Emp_table').on('click', function () {
+            let employee_id = $('#employee_id').val();
+            let search_Emp_name = $('#search_Emp_name').html();
+            let search_Emp_email = $('#search_Emp_email').html();
+            let search_Emp_phone = $('#search_Emp_phone').html();
+            $('#employee_id').val(employee_id);
+            $('#emp_name').val(search_Emp_name);
+            $('#emp_phone').val(search_Emp_phone);
+            $('#emp_email').val(search_Emp_email);
+            $("#search_Emp_table div").addClass('display');
+        });
+    });
+    $(document).ready(function () {
+        $("#cname").keyup(function () {
+            var search = $('#cname').val.length
+            if (search == 0) {
+                $(".search_table").addClass('display');
+                $('#not_found').addClass('display');
+            }
+            var query = $('#cname').val();
+            if (query != "") {
+                $.ajax({
+                    url: "{{ route('admin.enquiry.ajaxsearch') }}",
+                    method: 'POST',
+                    data: {
+                        query: query,
+                        _token: "{{ csrf_token() }}",
+                    },
+                    success: function (data) {
+                        if (data.status == 200) {
+                            $('#not_found').addClass('display');
+                            $('#not_found').text('');
+                            $(".search_table").removeClass('display');
+                            $('.user_icon').html(
+                                '<i class="fa fa-user d-flex justify-content-center align-items-center fa-lg"></i>'
+                                );
+                            $('#search_name').text(data.customer_name);
+                            $('#search_email').text(data.email);
+                            $('#search_phone').text(data.phone);
+                            $('#customer_code').val(data.customer_code);
+                            $('#customer_id').val(data.id);
+                        } else {
+                            $('.search_table').addClass('display');
+                            $('#not_found').removeClass('display');
+                            $('#not_found').text(data.message);
+                        }
+                    }
+                });
+            }
+        });
+    });
+    $(document).ready(function () {
+        $('#search_table').on('click', function () {
+            let customer_id = $('#customer_id').val();
+            let customer_code = $('#customer_code').val();
+            let search_name = $('#search_name').html();
+            let search_email = $('#search_email').html();
+            let search_phone = $('#search_phone').html();
+            $('#customer_id').val(customer_id);
+            $('#cname').val(search_name);
+            $('#cphone').val(search_phone);
+            $('#cemail').val(search_email);
+            $("#search_table div").addClass('display');
+        });
+    });
+function makeSubmenu(value, id) {
+        var lastChar = id.substring(8);
+        if (value.length == 0){
+            if(lastChar == 0){
+                document.querySelector(`service${lastChar}`).innerHTML = "<option></option>";
+            }else{
+                document.querySelector(`service${lastChar}`).innerHTML = "<option></option>";
+            }
+        }else{
+            var category_id = value;
+            $.ajax({
+                url: "{{ route('admin.category.getcatWiseService') }}",
+                method: 'post',
+                data: {
+                    category_id: category_id,
+                    _token: "{{ csrf_token() }}",
+                },
+                success: function (response) {
+                    if (response.status == 200) {
+                        var array = response.data;
+                        if(lastChar == 0){
+                            $(`#service${lastChar} option`).remove();
+                            $(`#service${lastChar}`).append('<option value="">Select Service...</option>');
+                            $.each(array, function(index, value) {
+                                $(`#service${lastChar}`).append('<option value="' + value[0] + '">' + value[1] + "</option>");
+                            });
+                        }else{
+                            $(`#service${lastChar} option`).remove();
+                            $(`#service${lastChar}`).append('<option value="">Select Service...</option>');
+                            $.each(array, function(index, value) {
+                                $(`#service${lastChar}`).append('<option value="' + value[0] + '">' + value[1] + "</option>");
+                            });
+                        }
+                    }else{
+
+                    }
+                }
+            });
+        }
+    }
 // Add Multiple Dynamic Input fields
+    var sl = 1;
     $('.extra-fields-customer').click(function () {
         $('.customer_records_edit').clone().appendTo('.customer_records_dynamic');
         $('.customer_records_dynamic .customer_records_edit').addClass('single row');
@@ -182,6 +389,9 @@
             $(this).attr('name', fieldname + count);
             count++;
         });
+        $(`#category${sl-1}`).attr("id",  `category${sl++}`);
+            var service = parseInt(sl-1);
+            $(`#service${service-1}`).attr("id",  `service${service}`);
     });
     $(document).on('click', '.remove-field', function (e) {
         $(this).parent('.row').remove();
@@ -190,77 +400,7 @@
     });
 
 
-    // $(document).ready(function() {
-    // $('#category').on('change', function() {
-    //     var category_id = $('#category').val();
-    //     $.ajax({
-    //         url: "{{ route('admin.enquiry.category_wise_service') }}",
-    //         method: 'POST',
-    //         data: {
-    //             category_id: category_id,
-    //             _token: "{{ csrf_token() }}",
-    //         },
-    //         success: function (data) {
-    //             if (data.status == 200) {
-
-    //             }else{
-
-    //             }
-    //         }
-    //     });
-    // });
-    // $(document).ready(function () {
-    //     $("#search_data").keyup(function () {
-    //         var search = $('#search_data').val.length
-    //         if (search == 0) {
-    //             $("#search_table").hide();
-    //         }
-    //         var query = $('#search_data').val();
-    //         if (query != "") {
-    //             $.ajax({
-    //                 url: "{{ route('admin.enquiry.ajaxsearch') }}",
-    //                 method: 'POST',
-    //                 data: {
-    //                     query: query,
-    //                     _token: "{{ csrf_token() }}",
-    //                 },
-    //                 success: function (data) {
-    //                     if (data.status == 200) {
-    //                         $("#search_table div").removeClass('display');
-    //                         $('#user_icon').html(
-    //                             '<i class="fa fa-user d-flex justify-content-center align-items-center fa-lg"></i>'
-    //                             );
-    //                         $('#search_name').text(data.customer_name);
-    //                         $('#search_email').text(data.email);
-    //                         $('#search_phone').text(data.phone);
-    //                         $('#customer_code').val(data.customer_code);
-    //                         $('#customer_id').val(data.id);
-    //                         $('#not_found').css('display', 'none');
-    //                     } else {
-    //                         $('#search_table').css('display', 'none');
-    //                         $('#not_found').text('data.message');
-    //                     }
-    //                 }
-    //             });
-    //         }
-    //     });
-    // });
-
-    // $(document).ready(function () {
-    //     $('#search_table').on('click', function () {
-    //         let customer_id = $('#customer_id').val();
-    //         let customer_code = $('#customer_code').val();
-    //         let search_name = $('#search_name').html();
-    //         let search_email = $('#search_email').html();
-    //         let search_phone = $('#search_phone').html();
-    //         $('#cname').val(search_name);
-    //         $('#cphone').val(search_phone);
-    //         $('#cemail').val(search_email);
-    //         // $( "#search_table" ).class('d-none', true);
-    //         $("#search_table div").addClass('display');
-    //         $("#search_data").val("");
-    //     });
-    // });
+   
     // ------------step-wizard-------------
     $(document).ready(function () {
         $('.nav-tabs > li a[title]').tooltip();

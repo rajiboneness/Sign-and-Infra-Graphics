@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
+use App\Models\Service;
 use App\Interfaces\CategoryInterface;
 
 class CategoryController extends Controller
@@ -15,6 +16,16 @@ class CategoryController extends Controller
     public function index(){
         $data = $this->CategoryRepository->getAllCategory();
         return view('admin.category.index', compact('data'));
+    }
+    public function getcatWiseService(Request $request){
+        $data = Service::where('category_id', $request->category_id)->get();
+        $items = array();
+        foreach($data as $value){
+            $items[] = array($value->id, "$value->name");
+        }
+        if($items){
+            return response()->json(["status" => 200, "data" => $items]);
+        }
     }
     public function store(Request $request){
         $request->validate([
