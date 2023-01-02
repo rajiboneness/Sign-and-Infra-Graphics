@@ -57,7 +57,7 @@
                     <a href="{{route('admin.home')}}" class="nav-item nav-link active"><i class="fa fa-tachometer-alt me-2"></i>Dashboard</a>
                     <div class="nav-item dropdown">
                         <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                            <i class="fa fa-th me-2"></i>Category Managemennt</a>
+                            <i class="fa fa-th me-2"></i>Category Management</a>
                         <div class="dropdown-menu bg-transparent border-0">
                             <a href="{{ route('admin.category.index') }}" class="dropdown-item"> All Categories</a>
                         </div>
@@ -80,7 +80,13 @@
                             <a href="{{ route('admin.customer.index') }}" class="dropdown-item">All Customers</a>
                         </div>
                     </div>
-                    <a href="{{ route('admin.enquiry.index') }}" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Enquiries Management</a>
+                    <div class="nav-item dropdown">
+                        <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i class="fa fa-th me-2"></i>Enquiries Management</a>
+                        <div class="dropdown-menu bg-transparent border-0">
+                            <a href="{{ route('admin.enquiry.index') }}" class="dropdown-item"><i class="fa fa-arrow-right me-2"></i>All Enquiries</a>
+                            <a href="{{ route('admin.enquiry.report') }}" class="dropdown-item"><i class="fa fa-arrow-right me-2"></i>All Reports</a>
+                        </div>
+                    </div>
                     <a href="{{ route('admin.invoice.index') }}" class="nav-item nav-link"><i class="fa fa-th me-2"></i>Invoice Management</a>
                 </div>
             </nav>

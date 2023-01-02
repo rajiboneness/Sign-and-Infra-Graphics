@@ -28,7 +28,7 @@ date_default_timezone_set('Asia/Calcutta');
                 <td style="text-align: center;border-top: 1px solid #808080;border-bottom: 1px solid #808080;">Mobile: +919163062233   Email:ravi.sharma@singandinfragraphics.in</td>
             </tr>
             <tr>
-                <td style="text-align: center;font-weight: 800;padding: 5px;border-bottom: 0px;text-decoration-line: underline;text-decoration-style: solid;">Quotation</td>
+                <td style="text-align: center;font-weight: 800;padding: 5px;border-bottom: 0px;text-decoration-line: underline;text-decoration-style: solid;">Invoice</td>
             </tr>
             <tr>
                 <td>
@@ -41,13 +41,12 @@ date_default_timezone_set('Asia/Calcutta');
                                 {{-- <p style="margin: 0;">Ph No: 9007015173</p> --}}
                             </td>
                             <td style="border:0px; vertical-align: top; width: 30%;">
-                                {{-- <p style="margin: 0;">Invoice Code: <strong> I1923CO000000429</strong></p> --}}
                                 <p style="margin: 0;">Order By: <strong>{{ $Enquiry->enquiries->name }}</strong></p>
-                                <p style="margin: 0;">PI. No: <strong id="invoiceCode"> {{ $Enquiry->invoice_code }}</strong></p>
+                                <p style="margin: 0;">Invoice. No: <strong id="invoiceCode"> {{ $Enquiry->invoice_code }}</strong></p>
                             </td>
                             <td style="border:0px; vertical-align: top;text-align: end;border-right: 1px solid #fff;">
-                                <p style="margin: 0;">Invoice Date<br/><strong>{{ date('d M Y', strtotime(date('m/d/Y'))) }}</strong></p>
-                                <p style="margin: 0;">Time<br/><strong>{{ date('H:i:s') }}</strong></p>
+                                <p style="margin: 0;">Date<br/><strong>{{ date('d M Y', strtotime($Enquiry->updated_at))}}</strong></p>
+                                <p style="margin: 0;">Time<br/><strong>{{ date('H:i:s', strtotime($Enquiry->updated_at))}}</strong></p>
                             </td>
                         </tr>
                         <tr>
@@ -116,6 +115,39 @@ date_default_timezone_set('Asia/Calcutta');
                             </tr>
                             
                         @endforeach
+                        @php
+                        $floatAmount = array_sum($totalAmount);
+                        @endphp
+                        @if(count($extra)>0)
+                        <tr>
+                            <td align="center" style="border-bottom: 0px;border-top:0px;padding: 2px; border-left: 1px solid #fff;border-right: 1px solid #808080;"></td>
+                            <td style="border-right:0px;border-bottom: 0px;border-top:0px;padding: 2px"><span><strong>Extra : </strong></span>
+                                @php
+                                $totalExtra = array();
+                                @endphp
+                                @foreach($extra as $extraValue)
+                                <span>{{ $extraValue->extra_service.',' }}</span>
+                               @php
+                               
+                               $totalExtra[] = $extraValue->rate;
+                               @endphp
+                                @endforeach
+                            </td>
+                            <td style="border-left: 0px;border-right:0px;text-align:center;border-bottom: 0px;border-top:0px;padding: 2px">
+                            </td>
+                            <td style="border-left: 0px;border-right:0px;text-align:center;border-bottom: 0px;border-top:0px;padding: 2px;border-right: 1px solid #808080;"></td>
+                            <td align="right" style="border-top: 0px;border-bottom:0px;padding: 2px;border-right: 1px solid #808080;"></td>
+                            <td align="right" style="padding: 2px;border-right: 1px solid #808080;border-top: 1px solid #808080;">Extra</td>
+                            @php
+                            
+                            $totalExtra = array_sum($totalExtra);
+                            $floatAmount = $floatAmount+$totalExtra;
+                            @endphp
+                            <td align="right"style="padding: 2px;border-right: 1px solid #fff;border-top: 1px solid #808080;">{{ number_format($totalExtra,2) }}
+                                <input type="hidden" value="{{ number_format((float)$totalExtra, 2, '.', '') }}">
+                            </td>
+                        </tr>
+                        @endif
                         <tr>
                             <td align="center" style="border-bottom: 0px;border-top:0px;padding: 2px; border-left: 1px solid #fff;border-right: 1px solid #808080;"></td>
                             <td style="border-right:0px;border-bottom: 0px;border-top:0px;padding: 2px">
@@ -124,9 +156,6 @@ date_default_timezone_set('Asia/Calcutta');
                             <td style="border-left: 0px;border-right:0px;text-align:center;border-bottom: 0px;border-top:0px;padding: 2px;border-right: 1px solid #808080;"></td>
                             <td align="right" style="border-top: 0px;border-bottom:0px;padding: 2px;border-right: 1px solid #808080;"></td>
                             <td align="right" style="padding: 2px;border-right: 1px solid #808080;border-top: 1px solid #808080;">Total</td>
-                            @php
-                             $floatAmount = array_sum($totalAmount);
-                            @endphp
                             <td align="right"style="padding: 2px;border-right: 1px solid #fff;border-top: 1px solid #808080;">{{ number_format($floatAmount,2) }}
                                 <input type="hidden" id="floatAmount" value="{{ number_format((float)$floatAmount, 2, '.', '') }}">
                             </td>
@@ -250,8 +279,6 @@ date_default_timezone_set('Asia/Calcutta');
                     }
                 }
             });
-
-            
         });
     });
     $(document).ready(function () {

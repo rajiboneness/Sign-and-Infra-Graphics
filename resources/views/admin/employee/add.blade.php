@@ -1,14 +1,16 @@
 @extends('admin.layouts.master')
 @section('content')
     <div class="container-fluid pt-4 px-4">
-        <div class="row g-4 justify-content-center">
+        <div class="row g-4">
+            <div class="col-md-2 col-12">
+                <div class="card">
+                    <a href="{{ route('admin.employee.index') }}" class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</a>
+                </div>
+            </div>
             <div class="col-md-8 col-12">
                 <div class="bg-white rounded h-100 p-4">
                     <div class="row">
-                        <div>
-                            <a href="{{ route('admin.employee.index') }}" class="btn btn-warning"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</a>
-                        </div>
-                        <h2 class="text-center"> New Employee</h2>
+                        <h4 class="text-center"> New Employee</h4>
                         <hr>
                     </div>
                     <form action="{{ route('admin.employee.store') }}" method="POST" id="addEmployeeForm">
@@ -56,8 +58,8 @@
                                 @error('address') <p class="small text-danger">{{ $message }}</p> @enderror
                             </div>
                         </div>
-                        <div class="bg-white text-end pt-4 px-4">
-                            <button type="button" class="btn btn-sm btn btn-primary" onClick='EmployeeDetailsForm()'>Add Employee</button>
+                        <div class="bg-white text-end">
+                            <button type="button" class="btn btn-sm btn btn-primary" onClick='EmployeeDetailsForm()'> <i class="fa fa-plus" aria-hidden="true"></i> Add Employee</button>
                         </div>
                     </form>
                 </div>

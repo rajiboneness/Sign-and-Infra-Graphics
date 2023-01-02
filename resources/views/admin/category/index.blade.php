@@ -43,7 +43,7 @@
                                                                 
                                                             </div>
                                                             <div class="modal-footer">
-                                                            <button type="submit" class="btn btn-primary">Save changes</button>
+                                                            <button type="submit" class="btn btn-primary btn-sm">Save changes</button>
                                                             </div>
                                                         </div>
                                                     </form>
@@ -57,7 +57,7 @@
                                                         <div class="pb-4"><i class="fa fa-check" aria-hidden="true"></i></div>
                                                         <h3>Are You Sure ?</h3>
                                                         <div class="">
-                                                        <a href="{{ route('admin.category.delete', $value->id) }}" class="btn btn-danger">Delete</a>
+                                                        <a href="{{ route('admin.category.delete', $value->id) }}" class="btn btn-danger btn-sm">Delete</a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -88,55 +88,8 @@
                             <input type="text" class="form-control" id="name" name="name" value="{{old('name')}}">
                             @error('name') <p class="small text-danger">{{ $message }}</p> @enderror
                         </div>
-                        {{-- <div class="mb-3">
-                            <label for="" class="form-label">Email<span class="text-danger">*</span></label>
-                            <input type="email" class="form-control" id="email" name="email" value="{{old('email')}}">
-                            @error('email') <p class="small text-danger">{{ $message }}</p> @enderror
-                        </div>
-                        <div class="mb-3">
-                            <label for="" class="form-label">Mobile<span class="text-danger">*</span></label>
-                            <input type="number" class="form-control" id="mobile" name="mobile" value="{{old('mobile')}}">
-                            @error('mobile') <p class="small text-danger">{{ $message }}</p> @enderror
-                        </div>
-                        <div class="mb-3">
-                            <label for="" class="form-label">Address<span class="text-danger">*</span></label>
-                            {{-- <input type="text" class="form-control" id="address" name="address" value="{{old('address')}}"> --}}
-                            {{-- <textarea name="address" class="form-control" id="address" cols="30" rows="3">{{old('address')}}</textarea>
-                            @error('address') <p class="small text-danger">{{ $message }}</p> @enderror
-                        </div>
-                        <div class="mb-3">
-                            <label for="" class="form-label">State</label>
-                            <input type="text" class="form-control" id="state" name="state" value="{{old('state')}}">
-                            @error('state') <p class="small text-danger">{{ $message }}</p> @enderror
-                        </div>
-                        <div class="mb-3">
-                            <label for="" class="form-label">Pincode<span class="text-danger">*</span></label>
-                            <input type="number" class="form-control" id="pincode" name="pincode" value="{{old('pincode')}}">
-                            @error('pincode') <p class="small text-danger">{{ $message }}</p> @enderror
-                        </div> --}}
-                        {{-- <div class="row p-2">
-                            <div class="col-md-12 card">
-                                <div class="card-header p-0 mb-3">Image* <span class="text-danger">*</span></div>
-                                <div class="card-body p-0">
-                                    <div class="w-100 product__thumb">
-                                        <label for="thumbnail"><img id="output" src="{{ asset('admin/img/placeholder-image.jpg') }}" /></label>
-                                    </div>
-                                    <input type="file" name="image_path" id="thumbnail" accept="image/*" onchange="loadFile(event)" class="d-none">
-                                    <script>
-                                        var loadFile = function(event) {
-                                            var output = document.getElementById('output');
-                                            output.src = URL.createObjectURL(event.target.files[0]);
-                                            output.onload = function() {
-                                                URL.revokeObjectURL(output.src) // free memory
-                                            }
-                                        };
-                                    </script>
-                                </div>
-                                @error('image_path') <p class="small text-danger">{{ $message }}</p> @enderror
-                            </div>
-                        </div> --}}
-                        <div class="bg-white text-end pt-4 px-4">
-                            <button type="submit" class="btn btn-sm btn btn-primary">Add Category</button>
+                        <div class="bg-white text-end">
+                            <button type="submit" class="btn btn-sm btn btn-primary"><i class="fa fa-plus" aria-hidden="true"></i> Add Category</button>
                         </div>
                     </div>
                 </form>

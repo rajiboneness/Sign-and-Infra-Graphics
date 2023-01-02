@@ -33,7 +33,7 @@
                                 <div class="customer_records row pt-2 d-none">
                                     <div class="col-md input_field_width">
                                         <div class="form-group">
-                                            <select name="category[]" id="category0" class="form-control category" onchange="makeSubmenu(this.value, this.id)" required>
+                                            <select name="category[]" id="category0" class="form-control category" onchange="makeSubmenu(this.value, this.id)">
                                                 <option value="" disabled selected>Choose Category</option>
                                                 @foreach($Category as $catdata)
                                                 <option value="{{ $catdata->id}}">{{ $catdata->name }}
@@ -44,7 +44,7 @@
                                     </div>
                                     <div class="col-md input_field_width">
                                         <div class="form-group">
-                                            <select name="service[]" id="service0" class="form-control citySelect" required>
+                                            <select name="service[]" id="service0" class="form-control citySelect">
                                                 <option value="" class="selectService">Select Category.</option>
                                             </select>
                                         </div>
@@ -52,29 +52,29 @@
                                     <div class="col-md-2">
                                         <div class="form-group">
                                             <input class="form-control" type="number" name="width[]"
-                                                placeholder="Width" required>
+                                                placeholder="Width">
                                         </div>
                                     </div>
                                     <div class="col-md-2">
                                         <div class="form-group">
                                             <input class="form-control" type="number" name="height[]"
-                                                placeholder="Height" required>
+                                                placeholder="Height">
                                         </div>
                                     </div>
                                     <div class="col-md-2">
                                         <div class="form-group">
                                             <input class="form-control" type="text" name="quantity[]"
-                                                placeholder="Quantity" required>
+                                                placeholder="Quantity">
                                         </div>
                                     </div>
                                     <div class="col-md-2">
                                         <div class="form-group">
                                             <input class="form-control" type="number" name="rate[]"
-                                                placeholder="Rate" required>
+                                                placeholder="Rate">
                                         </div>
                                     </div>
                                 </div>
-                                <form method="post" action="{{ route('admin.enquiry.preview') }}" class="login-box" id="AddEnquiryForm">
+                                <form method="post" action="{{ route('admin.enquiry.store') }}" class="login-box">
                                     @csrf
                                     <div class="tab-content" id="main_form">
                                         <div class="tab-pane active" role="tabpanel" id="step1">
@@ -191,7 +191,7 @@
                                             <div class="row pt-2">
                                                 <div class="col-md input_field_width">
                                                     <div class="form-group">
-                                                        <select name="category[]" id="category20" class="form-control category" onchange="makeSubmenu(this.value, this.id)" required>
+                                                        <select name="category[]" id="category20" class="form-control category" onchange="makeSubmenu(this.value, this.id)">
                                                             <option value="" disabled selected>Choose Category</option>
                                                             @foreach($Category as $catdata)
                                                             <option value="{{ $catdata->id}}">{{ $catdata->name }}
@@ -202,7 +202,7 @@
                                                 </div>
                                                 <div class="col-md input_field_width">
                                                     <div class="form-group">
-                                                        <select name="service[]" id="service20" class="form-control citySelect" required>
+                                                        <select name="service[]" id="service20" class="form-control citySelect">
                                                             <option value="" class="selectService">Select Category.</option>
                                                         </select>
                                                     </div>
@@ -210,25 +210,25 @@
                                                 <div class="col-md-2">
                                                     <div class="form-group">
                                                         <input class="form-control" type="number" name="width[]"
-                                                            placeholder="Width" required>
+                                                            placeholder="Width">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-2">
                                                     <div class="form-group">
                                                         <input class="form-control" type="number" name="height[]"
-                                                            placeholder="Height" required>
+                                                            placeholder="Height">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-2">
                                                     <div class="form-group">
                                                         <input class="form-control" type="text" name="quantity[]"
-                                                            placeholder="Quantity" required>
+                                                            placeholder="Quantity">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-2">
                                                     <div class="form-group">
                                                         <input class="form-control" type="number" name="rate[]"
-                                                            placeholder="Rate" required>
+                                                            placeholder="Rate">
                                                     </div>
                                                 </div>
                                             </div>
@@ -243,10 +243,10 @@
                                         </div>
                                         <div class="tab-pane" role="tabpanel" id="step4">
                                             <h4 class="text-center">Extra</h4>
-                                            <div class="row pt-2">
+                                            <div class="row pt-2 Extra_service_records">
                                                 <div class="col-md input_field_width">
                                                     <div class="form-group">
-                                                        <select name="extra[]" class="form-control" id="extraService">
+                                                        <select name="category[]" id="category20" class="form-control category" onchange="makeSubmenu(this.value, this.id)">
                                                             <option value="" disabled selected>Choose Service</option>
                                                             <option value="Transportation">Transportation</option>
                                                             <option value="Iron Angle">Iron Angle</option>
@@ -257,8 +257,8 @@
                                                 </div>
                                                 <div class="col-md-4">
                                                     <div class="form-group">
-                                                        <input class="form-control" type="number" name="amount[]"
-                                                            placeholder="Amount" id="extraAmount">
+                                                        <input class="form-control" type="number" name="rate[]"
+                                                            placeholder="Amount">
                                                     </div>
                                                 </div>
                                             </div>
@@ -268,9 +268,9 @@
                                                 <li><button type="button" class="default-btn prev-step btn-sm">Back</button>
                                                 </li>
                                                 <li><button type="submit"
-                                                        class="default-btn next-step" id="ExtraServiceAdd">Continue to
+                                                        class="default-btn next-step">Continue to
                                                         Preview</button></li>
-                                                        <li><button type="submit" class="btn-secondary btn-sm" id="ExtraServiceSkip">Skip</button>
+                                                        <li><button type="button" class="btn-secondary btn-sm">Skip</button>
                                                         </li>
                                             </ul>
                                         </div>
@@ -282,25 +282,6 @@
                     </div>
                 </section>
             </div>
-        </div>
-    </div>
-</div>
-<div class="row pt-2 Extra_service_records d-none">
-    <div class="col-md input_field_width">
-        <div class="form-group">
-            <select name="extra[]" class="form-control">
-                <option value="" disabled selected>Choose Service</option>
-                <option value="Transportation">Transportation</option>
-                <option value="Iron Angle">Iron Angle</option>
-                <option value="Scaffolding">Scaffolding</option>
-                <option value="Timer">Timer</option>
-            </select>
-        </div>
-    </div>
-    <div class="col-md-4">
-        <div class="form-group">
-            <input class="form-control" type="number" name="amount[]"
-                placeholder="Amount">
         </div>
     </div>
 </div>
@@ -318,24 +299,6 @@
 
  
 <script>
-    $('#ExtraServiceAdd').click(function(e) {
-        e.preventDefault();
-        if($('#extraService').val() == null){
-            $('#alert_content').text('Please Select Service !');
-            $('#AlertModal').modal('show')
-            return exit();
-        }else if($('#extraAmount').val() == ''){
-            $('#alert_content').text('Please Select Amount !');
-            $('#AlertModal').modal('show')
-            return exit();
-        }else{
-            $("#AddEnquiryForm").submit();
-        }
-    });
-    $('#ExtraServiceSkip').click(function(e){
-        e.preventDefault();
-        $("#AddEnquiryForm").submit();
-    });
 
     $('#Continue_Emp_btn').on('click', function () {
         if($('#EmpName').val() == ''){
@@ -369,7 +332,9 @@
             return exit();
         }
         else{
-            
+            var active = $('.wizard .nav-tabs li.active');
+            active.next().removeClass('disabled');
+            nextTab(active);
         }
     });
     function makeSubmenu(value, id) {
@@ -584,7 +549,7 @@ $('.extra-service-add').click(function () {
             var active = $('.wizard .nav-tabs li.active');
             active.next().removeClass('disabled');
             nextTab(active);
-            //console.log(active.next().html());
+            console.log(active.next().html());
         });
 
         $(".prev-step").click(function (e) {

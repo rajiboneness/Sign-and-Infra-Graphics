@@ -480,8 +480,42 @@ body{
     transition: all 0.3s ease-in-out;
 }
 .enquiry_table select{
-    width: 80%;
+    width: 87%;
+    padding-top: 1px;
+    padding-bottom: 1px;
     border: 0px;
+}
+#flexCheckChecked{
+    position: absolute;
+    padding: 7px;
+    margin-left: 5px;
+}
+.option_checkbox{
+    margin-right: 22px;
+}
+
+#notes1{
+    padding-bottom: 1px;
+    padding-top: 10px;
+    background: #f3f6f9;
+}
+.customer_card .fs{
+    font-size: 13px;
+}
+.details_cardhead h2{
+    font-size: 20px;
+}
+.customer_span{
+    color: #12b07f;
+    letter-spacing: 2px;
+    font-size: 11px;
+    font-weight: 900;
+}
+.form-group{
+    text-align: left;
+}
+.enquiry_table textarea{
+    width: 80%;
 }
 /*------------------------*/
     #enquiry_page input:focus,
@@ -590,7 +624,7 @@ body{
     }
 
     #enquiry_page .wizard .nav-tabs>li {
-        width: 50%;
+        width: 30%;
     }
 
     #enquiry_page .wizard li:after {
@@ -654,12 +688,56 @@ body{
     #enquiry_page .prev-step,
     #enquiry_page .next-step {
         font-size: 13px;
-        padding: 8px 24px;
+        padding: 6px 24px;
         border: none;
         border-radius: 4px;
         margin-top: 30px;
     }
-
+    .after_line:after {
+        content: "";
+        display: inline-block;
+        height: 0.6em;
+        vertical-align: bottom;
+        width: 81%;
+        margin-right: -100%;
+        margin-left: 5px;
+        border-top: 1px solid #d9d9d9;
+      }
+    .enquiry_notes:after {
+        content: "";
+        display: inline-block;
+        height: 0.6em;
+        vertical-align: bottom;
+        width: 87%;
+        margin-right: -100%;
+        margin-left: 5px;
+        border-top: 1px solid #d9d9d9;
+      }
+      .company_info:after {
+        content: "";
+        display: inline-block;
+        height: 0.6em;
+        vertical-align: bottom;
+        margin-right: -100%;
+        margin-left: 3px;
+        border-top: 1px solid #d9d9d9;
+        width: 75% !important;
+      }
+      .address_info:after {
+        content: "";
+        display: inline-block;
+        height: 0.6em;
+        vertical-align: bottom;
+        margin-right: -100%;
+        margin-left: 5px;
+        border-top: 1px solid #d9d9d9;
+        width: 72% !important;
+      }
+      .form-label{
+        margin-bottom: 0 !important;
+        font-size: 11px;
+        letter-spacing: 1px;
+      }
     #enquiry_page .next-step {
         background-color: #12b07f;
         color: #fff;
@@ -781,6 +859,9 @@ body{
     #enquiry_page .extra-fields-customer{
       padding: 0px 5px 0px 5px;
     }
+    #enquiry_page .extra-service-add{
+      padding: 0px 5px 0px 5px;
+    }
     #enquiry_page .btn-remove-customer{
       padding: 0px 5px 0px 5px;
     }
@@ -797,15 +878,16 @@ body{
         font-weight: 700;
         color: #222;
     }
-    .enquiry_details table th{
+    .enquiry_details table thead{
         background: #EEE;
         font-weight: bold;
         border-color: #BBB;
-        text-align: center;
         border-radius: 0.25em;
-        border-width: 1px;
         padding: 0.5em;
         position: relative;
+    }
+    .enquiry_details table th{
+        font-size: 13px;
     }
     .form_header{
         background: #f3f6f9;
@@ -813,6 +895,10 @@ body{
     .enquiry-tabs {
         z-index: 1000!important;
     }
+    li.disabled a {
+        cursor: not-allowed!important;
+        pointer-events: none!important;
+    } 
     @media (max-width: 767px) {
         #enquiry_page .sign-content h3 {
             font-size: 40px;

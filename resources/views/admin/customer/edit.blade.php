@@ -1,19 +1,21 @@
 @extends('admin.layouts.master')
 @section('content')
     <div class="container-fluid pt-4 px-4">
-        <div class="row g-4 justify-content-center">
+        <div class="row g-4">
+            <div class="col-md-2 col-12">
+                <div class="card">
+                    <a href="{{ route('admin.customer.index') }}" class="btn btn-warning btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</a>
+                </div>
+            </div>
             <div class="col-md-8 col-12">
                 <div class="bg-white rounded h-100 p-4">
                     <div class="row">
-                        <div>
-                            <a href="{{ route('admin.customer.index') }}" class="btn btn-warning"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</a>
-                        </div>
-                        <h2 class="text-center"> Update Customer</h2>
-                        <hr>
+                        <h4 class="text-center"> Update Customer</h4>
                     </div>
                     <form action="{{ route('admin.customer.update', $data->id) }}" method="POST">
                         @csrf
                         <div class="row">
+                            <span class="customer_span after_line">Personal Details</span>
                             <div class="mb-3 col-12 col-md-6">
                                 <label for="" class="form-label">First Name <span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" id="fname" name="fname" value="{{$data->fname}}">
@@ -42,7 +44,8 @@
                                 @error('whatsapp') <p class="small text-danger">{{ $message }}</p> @enderror
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row mt-4">
+                            <span class="customer_span company_info">Company Informations</span>
                             <div class="mb-3 col-12 col-md-6">
                                 <label for="" class="form-label">Company Name <span class="text-danger">*</span></label>
                                 <input type="text" class="form-control" id="company_name" name="company_name" value="{{$data->company_name}}">
@@ -66,7 +69,8 @@
                                 @error('contact_person') <p class="small text-danger">{{ $message }}</p> @enderror
                             </div>
                         </div>
-                        <div class="row">
+                        <div class="row mt-4">
+                            <span class="customer_span address_info">Residential Informations</span>
                             <div class="mb-3 col-12 col-md-12">
                                 <label for="" class="form-label">Address <span class="text-danger">*</span></label>
                                 <textarea type="text" class="form-control" id="address" name="address">{{$data->address}}</textarea>
@@ -97,8 +101,8 @@
                                 @error('pincode') <p class="small text-danger">{{ $message }}</p> @enderror
                             </div>
                         </div>
-                        <div class="bg-white text-end pt-4 px-4">
-                            <button type="submit" class="btn btn-sm btn btn-primary">Add Customer</button>
+                        <div class="bg-white text-end">
+                            <button type="submit" class="btn btn-sm btn btn-primary"><i class="fa fa-plus" aria-hidden="true"></i> Update Customer</button>
                         </div>
                     </form>
                 </div>

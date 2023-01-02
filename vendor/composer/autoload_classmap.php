@@ -44,6 +44,8 @@ return array(
     'App\\Models\\Enquiry' => $baseDir . '/app/Models/Enquiry.php',
     'App\\Models\\EnquiryDetail' => $baseDir . '/app/Models/EnquiryDetail.php',
     'App\\Models\\Invoice' => $baseDir . '/app/Models/Invoice.php',
+    'App\\Models\\Note' => $baseDir . '/app/Models/Note.php',
+    'App\\Models\\Quotation' => $baseDir . '/app/Models/Quotation.php',
     'App\\Models\\Service' => $baseDir . '/app/Models/Service.php',
     'App\\Providers\\AppServiceProvider' => $baseDir . '/app/Providers/AppServiceProvider.php',
     'App\\Providers\\AuthServiceProvider' => $baseDir . '/app/Providers/AuthServiceProvider.php',

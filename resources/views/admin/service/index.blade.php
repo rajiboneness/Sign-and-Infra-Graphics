@@ -53,7 +53,7 @@
                                                                     <input type="text" class="form-control" id="edit_name" name="edit_name" value="{{$value->name}}">
                                                             </div>
                                                             <div class="modal-footer">
-                                                            <button type="submit" class="btn btn-primary">Save changes</button>
+                                                            <button type="submit" class="btn btn-primary btn-sm">Save changes</button>
                                                             </div>
                                                         </div>
                                                     </form>
@@ -67,7 +67,7 @@
                                                         <div class="pb-4"><i class="fa fa-check" aria-hidden="true"></i></div>
                                                         <h3>Are You Sure ?</h3>
                                                         <div class="">
-                                                        <a href="{{ route('admin.service.delete', $value->id) }}" class="btn btn-danger">Delete</a>
+                                                        <a href="{{ route('admin.service.delete', $value->id) }}" class="btn btn-danger btn-sm">Delete</a>
                                                         </div>
                                                     </div>
                                                 </div>
@@ -110,8 +110,8 @@
                             <input type="text" class="form-control" id="name" name="name" value="{{old('name')}}">
                             @error('name') <p class="small text-danger">{{ $message }}</p> @enderror
                         </div>
-                        <div class="bg-white text-end pt-4 px-4">
-                            <button type="submit" class="btn btn-sm btn btn-primary">Add Service</button>
+                        <div class="bg-white text-end">
+                            <button type="submit" class="btn btn-sm btn btn-primary"><i class="fa fa-plus" aria-hidden="true"></i> Add Service</button>
                         </div>
                     </div>
                 </form>

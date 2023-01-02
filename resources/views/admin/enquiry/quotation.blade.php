@@ -7,165 +7,66 @@
         color: #222;
         background: #fff !important;
     }
-    #invoice_table{
-        width: 100%; border-collapse: collapse;border: 1px solid #222;
-    }
-    .saif{
-        text-align: center;font-size: 19px;font-weight: 800; padding: 5px;
-    }
-    .caddress{
-        text-align: center;border-top: 1px solid #808080;
-    }
-    .mobile_email{
-        text-align: center;border-top: 1px solid #808080;border-bottom: 1px solid #808080;
-    }
-    .quotation{
-        text-align: center;font-weight: 800;padding: 5px;border-bottom: 0px;text-decoration-line: underline;text-decoration-style: solid;
-    }
-    .table2{
-        width: 100%; border-collapse: collapse;
-    }
-    .table2 .tr1{
-        border-top: 1px solid #fff;
-    }
-    .table2 .tr1 .td1{
-        border-left: 1px solid #fff;border-bottom: 0px;border-right: 0px;width: 50%;vertical-align: top;
-    }
-    .table2 .tr1 .td2{
-        border:0px; vertical-align: top; width: 30%;
-    }
-    .table2 .tr1 .td3{
-        border:0px; vertical-align: top;text-align: end;border-right: 1px solid #fff;
-    }
-    .table2 .tr2 .td2{
-        border:0px;border-right: 1px solid #fff;
-    }
-    .table2 .tr3{
-        border-bottom: 1px solid #fff;
-    }
-    .table2 .tr3 .td1{
-        border: 0px;border-left: 1px solid #fff;
-    }
-    .table2 .tr3 .td3{
-        border: 0px;border-right: 1px solid #fff;
-    }
-    .table3{
-        width: 100%; border-collapse: collapse;
-    }
-    .table3 .tr1{
-        border-top: 0px;
-    }
-    .table3 .tr1 .td1{
-        text-align:center;border-left: 1px solid #fff;border-right: 1px solid #808080;border-bottom: 1px solid #808080;
-    }
-    .table3 .tr1 .td2{
-        text-align:center;border-right: 1px solid #808080;border-bottom: 1px solid #808080;
-    }
-    .table3 .tr1 .td3{
-        text-align:center;border-right: 1px solid #808080;border-bottom: 1px solid #808080;
-    }
-    .table3 .tr1 .td4{
-        text-align:center;border-right: 1px solid #808080;border-bottom: 1px solid #808080;
-    }
-    .table3 .tr1 .td5{
-        text-align:center;border-right: 1px solid #fff;border-bottom: 1px solid #808080;
-    }
-    .table3 .tr2 .td1{
-        border-bottom: 0px;border-top:0px;border-left: 1px solid #fff;border-right: 1px solid #808080;
-    }
-    .table3 .tr2 .td2{
-        border-right:0px;text-align:center;text-decoration-line: underline;border-bottom: 0px;border-top:0px; width: 40%;
-    }
-    .table3 .tr2 .td3{
-        text-align:center;text-decoration-line: underline;border-bottom: 0px;border-top:0px;border-right:0px;border-left: 0px; width: 1%;
-    }
-    .table3 .tr2 .td4{
-        border-left: 0px; border-right: 1px solid #808080;text-align:center;text-decoration-line: underline;border-bottom: 0px;border-top:0px; width: 15%;
-    }
-    .table3 .tr2 .td5{
-        border-top: 0px;border-bottom:0px;border-right: 1px solid #808080;
-    }
-    .table3 .tr2 .td6{
-        border-top: 0px;border-bottom:0px;border-right: 1px solid #fff;
-    }
-    .table3 .tr3 .td1{
-        border-bottom: 0px;border-top:0px;padding: 2px; border-left: 1px solid #fff;border-right: 1px solid #808080;
-    }
-    .table3 .tr3 .td2{
-        border-right:0px; border-bottom: 0px;border-top:0px;padding: 2px;
-    }
-    .table3 .tr3 .td3{
-        border-left: 0px;border-right:0px;text-align:center;border-bottom: 0px;border-top:0px;padding: 2px;
-    }
-    .table3 .tr3 .td4{
-        border-left: 0px;text-align:center;border-bottom: 0px;border-top:0px;padding: 2px;border-right: 1px solid #808080;
-    }
-    .table3 .tr3 .td5{
-        border-top: 0px;border-bottom:0px;padding: 2px;border-right: 1px solid #808080;
-    }
-    .table3 .tr3 .td6{
-        border-top: 0px;border-bottom:0px;padding: 2px;border-right: 1px solid #fff;
-    }
-    
 </style>
 
-@php
-date_default_timezone_set('Asia/Calcutta'); 
-@endphp
     <div class="container-fluid pt-4 px-4 pb-4 bg-light invoice">
         <div class="text-end py-4">
             <a href="{{ route('admin.enquiry.index') }}" class="btn btn-secondary btn-sm"><i class="fa fa-arrow-left" aria-hidden="true"></i> Back</a>
-            <button class="btn btn-primary btn-sm" id="print_btn">Print</button>
+            <button class="btn btn-primary btn-sm" id="print_btn">Generate</button>
         </div>
-        <table border="2" cellpadding="0" cellspacing="0" id="invoice_table">
+        <table border="2" style="width: 100%; border-collapse: collapse;border: 1px solid #222;" cellpadding="0" cellspacing="0" id="invoice_table">
             <tr>
-                <td class="saif">SIGN AND INFRA GRAPHICS</td>
+                <td style="text-align: center;font-size: 19px;font-weight: 800; padding: 5px;">SIGN AND INFRA GRAPHICS</td>
             </tr>
             <tr>
-                <td class="caddress">Hatiara Satsangpally Uttarmath Naskarpara Near Pragatisang Club, 700157</td>
+                <td style="text-align: center;border-top: 1px solid #808080;">Hatiara Satsangpally Uttarmath Naskarpara Near Pragatisang Club, 700157</td>
             </tr>
             <tr>
-                <td class="mobile_email">Mobile: +919163062233   Email:ravi.sharma@singandinfragraphics.in</td>
+                <td style="text-align: center;border-top: 1px solid #808080;border-bottom: 1px solid #808080;">Mobile: +919163062233   Email:ravi.sharma@singandinfragraphics.in</td>
             </tr>
             <tr>
-                <td class="quotation">Quotation</td>
+                <td style="text-align: center;font-weight: 800;padding: 5px;border-bottom: 0px;text-decoration-line: underline;text-decoration-style: solid;">Quotation</td>
             </tr>
             <tr>
                 <td>
-                    <table border="1" class="table2" cellpadding="10" cellspacing="0">
+                    <table border="1" style="width: 100%; border-collapse: collapse;" cellpadding="10" cellspacing="0">
                         
-                        <tr class="tr1">
-                            <td rowspan="2" class="td1">
+                        <tr style="border-top: 1px solid #fff;">
+                            <td rowspan="2" style="border-left: 1px solid #fff;border-bottom: 0px;border-right: 0px;width: 50%;vertical-align: top;">
                                 <p style="margin: 0">Consignee</p>
                                 <p style="margin: 0;"><strong>ICICI Bank</strong><br/>G.C Avenue <br>West Bengal</p>
                                 {{-- <p style="margin: 0;">Ph No: 9007015173</p> --}}
                             </td>
-                            <td class="td2">
-                                <p style="margin: 0;">Invoice Code: <strong> I1923CO000000429</strong></p>
+                            <td style="border:0px; vertical-align: top; width: 30%;">
                                 <p style="margin: 0;">Order By: <strong>{{ $Enquiry->name }}</strong></p>
-                                <p style="margin: 0;">PI. No: <strong> SIG/008/22-23</strong></p>
+                                <p style="margin: 0;">PI. No: <strong id="invoiceCode"> {{ isset($getQuotation) ? $getQuotation->quotation_code : $invoiceCode }}</strong></p>
                             </td>
-                            <td class="td3">
-                                <p style="margin: 0;">Invoice Date<br/><strong>{{ date('d M Y', strtotime(date('m/d/Y'))) }}</strong></p>
-                                <p style="margin: 0;">Time<br/><strong>{{ date('H:i:s') }}</strong></p>
+                            <td style="border:0px; vertical-align: top;text-align: end;border-right: 1px solid #fff;">
+                                <p style="margin: 0;">Date<br/><strong>{{ isset($getQuotation) ? date('d M Y', strtotime($getQuotation->created_at)) : date('d M Y', strtotime($Enquiry->created_at))}}</strong></p>
+                                <p style="margin: 0;">Time<br/><strong>{{ isset($getQuotation) ? date('H:i:s', strtotime($getQuotation->created_at)) : date('H:i:s', strtotime($Enquiry->created_at))}}</strong></p>
                             </td>
                         </tr>
-                        <tr class="tr2">
+                        <tr>
                             <td style="border:0px;">
+                                
                             </td>
-                            <td class="td2">
+                            <td style="border:0px;border-right: 1px solid #fff;">
+                                
                             </td>
                         </tr>
-                        <tr class="tr3">
-                            <td class="td1">
+                        <tr style="border-bottom: 1px solid #fff;">
+                            <td style="border: 0px;border-left: 1px solid #fff;">
                                 <p style="margin: 0;">Buyer: <br/><strong>{{ $Enquiry->name }}</strong><br/>{{ $Enquiry->customers->address.','.$Enquiry->customers->city.','.$Enquiry->customers->state }} </p>
                                 <span>{{ $Enquiry->customers->country.','.$Enquiry->customers->pincode }}</span>
                                 <p style="margin: 0;">T : {{ $Enquiry->phone }}</p>
                                 {{-- <p style="margin: 0;">E : {{ $Enquiry->email }}</p> --}}
                             </td>
                             <td style="border: 0px;">
+                                
+                                
                             </td>
-                            <td class="td3">
+                            <td style="border: 0px;border-right: 1px solid #fff;">
+                                
                             </td>
                         </tr>
                     </table>
@@ -173,44 +74,77 @@ date_default_timezone_set('Asia/Calcutta');
             </tr>
             <tr>
                 <td>
-                    <table border="1" class="table3" cellpadding="10" cellspacing="0">
-                        <tr class="tr1">
-                            <th class="td1">SI No.</th>
-                            <th colspan="3" class="td2">Descriptions of Goods</th>
-                            <th  class="td3">Quantity <br>(Sq. Ft.)</th>
-                            <th class="td4">Rate <br>(Rs./Sq.Ft.)</th>
-                            <th class="td5">Amount (INR)</th>
+                    <table border="1" style="width: 100%; border-collapse: collapse;" cellpadding="10" cellspacing="0">
+                        <tr style="border-top: 0px;">
+                            <th style="text-align:center;border-left: 1px solid #fff;border-right: 1px solid #808080;border-bottom: 1px solid #808080;">SI No.</th>
+                            <th colspan="3" style="text-align:center;border-right: 1px solid #808080;border-bottom: 1px solid #808080;">Descriptions of Goods</th>
+                            <th  style="text-align:center;border-right: 1px solid #808080;border-bottom: 1px solid #808080;">Quantity <br>(Sq. Ft.)</th>
+                            <th style="text-align:center;border-right: 1px solid #808080;width: 10%;border-bottom: 1px solid #808080;">Rate <br>(Rs./Sq.Ft.)</th>
+                            <th style="text-align:center;border-right: 1px solid #fff;border-bottom: 1px solid #808080;">Amount (INR)</th>
                         </tr>
-                        <tr class="tr2">
-                            <td class="td1"></td>
-                            <td class="td2"><strong>ICICI Bank</strong></td>
-                            <td class="td3"><strong>W</strong></td>
-                            <td class="td4"><strong>H</strong></td>
-                            <td align="right"class="td5"></td>
-                            <td align="right"class="td5"></td>
-                            <td align="right"class="td6"></td>
+                        <tr>
+                            <td  style="border-bottom: 0px;border-top:0px;border-left: 1px solid #fff;border-right: 1px solid #808080;"></td>
+                            <td style="border-right:0px;text-align:center;text-decoration-line: underline;border-bottom: 0px;border-top:0px; width: 40%;"><strong>ICICI Bank</strong></td>
+                            <td style="text-align:center;text-decoration-line: underline;border-bottom: 0px;border-top:0px;border-right:0px;border-left: 0px; width: 1%;"><strong>W</strong></td>
+                            <td style="border-left: 0px; border-right: 1px solid #808080;text-align:center;text-decoration-line: underline;border-bottom: 0px;border-top:0px; width: 15%;"><strong>H</strong></td>
+                            <td align="right"style="border-top: 0px;border-bottom:0px;border-right: 1px solid #808080;"></td>
+                            <td align="right"style="border-top: 0px;border-bottom:0px;border-right: 1px solid #808080;"></td>
+                            <td align="right"style="border-top: 0px;border-bottom:0px;border-right: 1px solid #fff;"></td>
                         </tr>
                        @php
                         $totalAmount = array();
                         $totalquantity = array();
                        @endphp
                         @foreach($details as $key => $invoice)
-                            <tr class="tr3">
-                                <td align="center" class="td1">{{ $key+1 }}</td>
-                                <td class="td2">{{ $invoice->services->name }}</td>
-                                <td class="td3"><strong>{{ $invoice->width }}</strong></td>
-                                <td class="td4"><strong>{{ $invoice->height }}</strong></td>
-                                <td align="right"class="td5">{{ $invoice->quantity }}</td>
-                                <td align="right"class="td5">{{ number_format($invoice->rate, 2) }}</td>
+                            <tr>
+                                <td align="center" style="border-bottom: 0px;border-top:0px;padding: 2px; border-left: 1px solid #fff;border-right: 1px solid #808080;">{{ $key+1 }}</td>
+                                <td style="border-right:0px; border-bottom: 0px;border-top:0px;padding: 2px">{{ $invoice->services->name }}</td>
+                                <td style="border-left: 0px;border-right:0px;text-align:center;border-bottom: 0px;border-top:0px;padding: 2px"><strong>{{ $invoice->width }}</strong></td>
+                                <td style="border-left: 0px;text-align:center;border-bottom: 0px;border-top:0px;padding: 2px;border-right: 1px solid #808080;"><strong>{{ $invoice->height }}</strong></td>
+                                <td align="right"style="border-top: 0px;border-bottom:0px;padding: 2px;border-right: 1px solid #808080;">{{ $invoice->quantity }}</td>
+                                <td align="right"style="border-top: 0px;border-bottom:0px;padding: 2px;border-right: 1px solid #808080;">{{ number_format($invoice->rate, 2) }}</td>
                                 @php
                                 $amount = $invoice->quantity*$invoice->rate;
                                 $totalAmount[] = $amount;
                                 $totalquantity[] = $invoice->quantity;
                                 @endphp
-                                <td align="right"class="td6"><strong>{{number_format($amount, 2)  }}</strong> </td>
+                                <td align="right"style="border-top: 0px;border-bottom:0px;padding: 2px;border-right: 1px solid #fff;"><strong>{{number_format($amount, 2)  }}</strong> </td>
                             </tr>
                             
                         @endforeach
+                        @php
+                        $floatAmount = array_sum($totalAmount);
+                        @endphp
+                        @if(count($extra)>0)
+                        <tr>
+                            <td align="center" style="border-bottom: 0px;border-top:0px;padding: 2px; border-left: 1px solid #fff;border-right: 1px solid #808080;"></td>
+                            <td style="border-right:0px;border-bottom: 0px;border-top:0px;padding: 2px"><span><strong>Extra : </strong></span>
+                                @php
+                                $totalExtra = array();
+                                @endphp
+                                @foreach($extra as $extraValue)
+                                <span>{{ $extraValue->extra_service.',' }}</span>
+                               @php
+                               
+                               $totalExtra[] = $extraValue->rate;
+                               @endphp
+                                @endforeach
+                            </td>
+                            <td style="border-left: 0px;border-right:0px;text-align:center;border-bottom: 0px;border-top:0px;padding: 2px">
+                            </td>
+                            <td style="border-left: 0px;border-right:0px;text-align:center;border-bottom: 0px;border-top:0px;padding: 2px;border-right: 1px solid #808080;"></td>
+                            <td align="right" style="border-top: 0px;border-bottom:0px;padding: 2px;border-right: 1px solid #808080;"></td>
+                            <td align="right" style="padding: 2px;border-right: 1px solid #808080;border-top: 1px solid #808080;">Extra</td>
+                            @php
+                            
+                            $totalExtra = array_sum($totalExtra);
+                            $floatAmount = $floatAmount+$totalExtra;
+                            @endphp
+                            <td align="right"style="padding: 2px;border-right: 1px solid #fff;border-top: 1px solid #808080;">{{ number_format($totalExtra,2) }}
+                                <input type="hidden" value="{{ number_format((float)$totalExtra, 2, '.', '') }}">
+                            </td>
+                        </tr>
+                        @endif
                         <tr>
                             <td align="center" style="border-bottom: 0px;border-top:0px;padding: 2px; border-left: 1px solid #fff;border-right: 1px solid #808080;"></td>
                             <td style="border-right:0px;border-bottom: 0px;border-top:0px;padding: 2px">
@@ -219,9 +153,6 @@ date_default_timezone_set('Asia/Calcutta');
                             <td style="border-left: 0px;border-right:0px;text-align:center;border-bottom: 0px;border-top:0px;padding: 2px;border-right: 1px solid #808080;"></td>
                             <td align="right" style="border-top: 0px;border-bottom:0px;padding: 2px;border-right: 1px solid #808080;"></td>
                             <td align="right" style="padding: 2px;border-right: 1px solid #808080;border-top: 1px solid #808080;">Total</td>
-                            @php
-                             $floatAmount = array_sum($totalAmount);
-                            @endphp
                             <td align="right"style="padding: 2px;border-right: 1px solid #fff;border-top: 1px solid #808080;">{{ number_format($floatAmount,2) }}
                                 <input type="hidden" id="floatAmount" value="{{ number_format((float)$floatAmount, 2, '.', '') }}">
                             </td>
@@ -234,25 +165,25 @@ date_default_timezone_set('Asia/Calcutta');
                             <td style="border-left: 0px;border-right:0px;text-align:center;border-bottom: 0px;border-top:0px;padding: 2px;border-right: 1px solid #808080;"></td>
                             <td align="right" style="border-top: 0px;border-bottom:0px;padding: 2px;border-right: 1px solid #808080;"></td>
                             <td align="right" style="border-top: 0px;border-bottom:0px;padding: 2px;border-right: 1px solid #808080;border-top: 1px solid #808080;">
-                                IGST <span id="hiddengst" class="d-none"> </span><input type="text" id="gst_amount" onkeypress="return onlyNumberKey(event)" style="width: 27px; padding:0px;text-align:center;" value="">%</td>
+                                SGST <span id="hiddengst" class="d-none"> 0</span><input type="text" id="gst_amount" onkeypress="return onlyNumberKey(event)" style="width: 27px; padding:0px;text-align:center;" value="">%</td>
                             <td align="right"style="border-top: 0px;border-bottom:0px;padding: 2px;border-right: 1px solid #fff;border-top: 1px solid #808080;" id="amountGST"></td>
                         </tr>
                         <tr>
                             <td align="center"style="border-bottom: 0px;border-top:0px;border-left: 1px solid #fff;border-right: 1px solid #808080;"></td>
                             <td align="center" style="padding: 2px;border-top: 1px solid #808080;border-right: 1px solid #808080;"><strong>Total</strong></td>
-                            <td align="right"style="border-right:0px;border-top: 1px solid #808080;"></td>
-                            <td align="right" style="border-left: 0px;padding: 2px;border-right: 1px solid #808080;border-top: 1px solid #808080;"><strong>Total Qty.(Sq. Ft.):</strong></td>
+                            {{-- <td align="right"style="border-right:0px;border-top: 1px solid #808080;"></td> --}}
+                            <td align="right" colspan="2" style="border-left: 0px;padding: 2px;border-right: 1px solid #808080;border-top: 1px solid #808080;"><strong>Total Qty.(Sq. Ft.):</strong></td>
                             @php
                             $floatquantity = array_sum($totalquantity);
                             @endphp
-                            <td align="right" style="border-left: 0px;border-top: 1px solid #808080;padding: 2px;border-right: 1px solid #808080;">{{ $floatquantity }}</td>
+                            <td align="right" id="totalQuantity" style="border-left: 0px;border-top: 1px solid #808080;padding: 2px;border-right: 1px solid #808080;">{{ $floatquantity }}</td>
                             <td align="right" style="border-top: 1px solid #808080;padding: 2px;border-right: 1px solid #808080;">Round Off</td>
                             <td align="right"style="padding: 2px;border-right: 1px solid #fff;border-top: 1px solid #808080;"></td>
                         </tr>
                         <tr>
                             <td colspan="5" style="border-left: 1px solid #fff;border-top: 1px solid #808080;border-right: 1px solid #808080; border-bottom: 1px solid #808080;">Payment Terms: Against Delivery</td>
                             <td align="right" style="padding-right: 2px;border-right: 1px solid #808080;border-top: 1px solid #808080;border-bottom: 1px solid #808080;"><strong>Grand Total</strong></td>
-                            <td align="right"style="padding-right: 2px;border-top: 1px solid #808080;border-right: 1px solid #fff;border-bottom: 1px solid #808080;"><strong id="grand_total">{{ number_format($floatAmount, 2) }}</strong></td>
+                            <td align="right" id="grandTotal" style="padding-right: 2px;border-top: 1px solid #808080;border-right: 1px solid #fff;border-bottom: 1px solid #808080;"><strong id="grand_total">{{ number_format($floatAmount, 2) }}</strong></td>
                         </tr>
                     </table>
                 </td>
@@ -305,6 +236,8 @@ date_default_timezone_set('Asia/Calcutta');
                 </td>
             </tr>
         </table>
+        <input type="hidden" name="totalitems" id="totalitems" value="{{ count($details) }}">
+        <input type="hidden" name="enquiry_id" id="enquiry_id" value="{{ $Enquiry->id }}">
     </div>
 @endsection
 @section('script')
@@ -319,7 +252,30 @@ date_default_timezone_set('Asia/Calcutta');
         $('#print_btn').click(function(){
             $('#gst_amount').css('display', 'none');
             $('#hiddengst').removeClass('d-none');
-            $('#invoice_table').printThis();
+            var gst = $('#hiddengst').text();
+            var quantity = $('#totalQuantity').text();
+            var invoiceCode = $('#invoiceCode').text();
+            var grandTotal = $('#grandTotal').text();
+            var totalitems = $('#totalitems').val();
+            var enquiry_id = $('#enquiry_id').val();
+            $.ajax({
+                url: "{{ route('admin.enquiry.quotation-store') }}",
+                type: "POST",
+                data: { 
+                    _token: '{{ csrf_token() }}',
+                    gst : gst,
+                    quantity : quantity,
+                    invoiceCode : invoiceCode,
+                    grandTotal : grandTotal,
+                    totalitems : totalitems,
+                    enquiry_id : enquiry_id
+                },
+                success: function(response){
+                    if(response.status ==200){
+                    $('#invoice_table').printThis();
+                    }
+                }
+            });
         });
     });
     $(document).ready(function () {

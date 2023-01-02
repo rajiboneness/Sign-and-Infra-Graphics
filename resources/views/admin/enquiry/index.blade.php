@@ -23,7 +23,7 @@
                                     <th scope="col">Customer Name</th>
                                     <th scope="col">Enquiry Details</th>
                                     <th scope="col">Status</th>
-                                    <th scope="col">Quotation</th>
+                                    <th scope="col">Action</th>
                                     <th scope="col">Date</th>
                                 </tr>
                             </thead>
@@ -64,54 +64,18 @@
                                         </td>
                                         
                                         <td> 
-                                            @php
-                                            if($value->status == 1){
-                                                $status = "New";
-                                                $color = "bg-warning";
-                                            }elseif($value->status == 2){
-                                                $status = "Ongoing";
-                                                $color = "bg-primary";
-                                            }elseif($value->status == 3){
-                                                $status = "Quotation Provided";
-                                                $color = "bg-info";
-                                            }elseif($value->status ==4){
-                                                $status = "Order Generated";
-                                                $color = "bg-success";
-                                            }else{
-                                                $status = "Cancelled";
-                                                $color = "bg-danger";
-                                            }
-                                            
-                                            @endphp
-                                            <a href="javascript:void(0)" class="text-light badge {{ $color }}" data-bs-toggle="modal" data-bs-target="#statusModal{{ $key+1 }}"> {{ $status }}</a>
-                                                <!-- Delete Modal -->
-                                            <div class="modal fade" id="statusModal{{ $key+1 }}" tabindex="-1" aria-hidden="true">
-                                                <div class="modal-dialog deleteModal modal-dialog-centered modal-sm">
-                                                    <div class="modal-content">
-                                                        <form action="{{ route('admin.enquiry.status') }}" method="post">
-                                                            @csrf
-                                                                <div class="my-4">
-                                                                    <select name="status" id="status" class="form-control me-auto ms-auto">
-                                                                        <option value="">Change Status..</option>
-                                                                        <option value="1">New</option>
-                                                                        <option value="2">Ongoing</option>
-                                                                        <option value="3">Quotation Provided</option>
-                                                                        <option value="4">Order Generated</option>
-                                                                        <option value="0">Cancelled</option>
-                                                                    </select>
-                                                                </div>
-                                                                <input type="hidden" name="enquiry_id" value="{{ $value->id }}">
-                                                                <button type="submit" class="btn btn-success">Update</button>
-                                                        </form>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                            <select name="status" data="{{ $value->id }}" onchange="makeSubmenu($(this).attr('data'), this.value)" class="form-control">
+                                                <option value="1" {{ $value->status == 1 ? 'Selected' : '' }}>New</option>
+                                                <option value="2" {{ $value->status == 2 ? 'Selected' : '' }}>Outgoing</option>
+                                                <option value="3" {{ $value->status == 3 ? 'Selected' : '' }}>Quotation Provided</option>
+                                                <option value="4" {{ $value->status == 4 ? 'Selected' : '' }}>Order Generated</option>
+                                                <option value="0" {{ $value->status == 0 ? 'Selected' : '' }}>Cancelled</option>
+                                            </select>
+                                            <a href="{{ route('admin.enquiry.notes', $value->id) }}" class="text-light badge bg-secondary">Notes</a>
                                         </td>
                                         <td>
-                                            @if($value->quotation ==1)
-                                            <a href="{{ route('admin.enquiry.invoice', $value->id) }}" class="text-light badge bg-success">Quotation</a>
-                                            @else
-                                            <a href="javascript:void(0)" class="text-light badge bg-danger" data-bs-toggle="modal" data-bs-target="#InvoiceModal{{ $key+1 }}">Generate Invoice</a>
+                                            @if($value->invoice ==0)
+                                            <a href="javascript:void(0)" class="text-light badge bg-danger"  data-bs-toggle="modal" data-bs-target="#InvoiceModal{{ $key+1 }}">Generate Invoice</a>
                                             {{-- generate Invoice --}}
                                             <div class="modal fade" id="InvoiceModal{{ $key+1 }}" tabindex="-1" aria-hidden="true">
                                                 <div class="modal-dialog deleteModal modal-dialog-centered modal-sm">
@@ -124,6 +88,25 @@
                                                     </div>
                                                 </div>
                                             </div>
+                                            @else
+                                            <a href="{{ route('admin.enquiry.invoice', $value->id)  }}" class="text-light badge bg-success">Invoice</a>
+                                            @endif
+                                            @if($value->quotation ==0)
+                                            <a href="javascript:void(0)" class="text-light badge bg-danger" data-bs-toggle="modal" data-bs-target="#QuotationModal{{ $key+1 }}">Generate Quotation</a>
+                                            {{-- generate Quotation --}}
+                                            <div class="modal fade" id="QuotationModal{{ $key+1 }}" tabindex="-1" aria-hidden="true">
+                                                <div class="modal-dialog deleteModal modal-dialog-centered modal-sm">
+                                                    <div class="modal-content">
+                                                        <div class="pb-4"><i class="fa fa-check" aria-hidden="true"></i></div>
+                                                        <h3>Are You Sure ?</h3>
+                                                        <div class="">
+                                                        <a href="{{ route('admin.enquiry.quotation-status', $value->id) }}" class="btn btn-danger">Generate</a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            @else
+                                            <a href="{{ route('admin.enquiry.quotation', $value->id)  }}" class="text-light badge bg-success">Quotation</a>
                                             @endif
                                         </td>
                                         <td>
@@ -131,7 +114,7 @@
                                         </td>
                                     </tr>
                                     <tr>
-                                        <td colspan="12" class="hiddenRow">
+                                        <td colspan="6" class="hiddenRow">
                                             <div class="accordian-body collapse" id="demo{{ $key+1 }}">
                                                 <table class="table table-striped">
                                                     <thead>
@@ -147,6 +130,7 @@
                                                     </thead>
                                                     <tbody>
                                                         @foreach($enquiryDetails as $details)
+                                                        @if($details->service_id)
                                                             <tr data-toggle="collapse" data-target="#demo1" class="accordion-toggle">
                                                                 <td>{{ $details->categories->name }}</td>
                                                                 <td>{{ $details->services->name }}</td>
@@ -156,6 +140,7 @@
                                                                 <td>{{ "₹ ".$details->rate }}</td>
                                                                 <td>{{ "₹ ".$details->amount }}</td>
                                                             </tr>
+                                                            @endif
                                                         @endforeach
                                                     </tbody>
                                                 </table>
@@ -180,6 +165,22 @@
 @section('script')
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <script>
+    function makeSubmenu(data, value) {
+        $.ajax({
+            url: "{{ route('admin.enquiry.status') }}",
+            type: "POST",
+            data: {
+                status: value,
+                id: data,
+                _token: "{{ csrf_token() }}",
+            },
+            success: function (response) {
+                if(response.status == 200){
+                    window.location.reload(true);
+                }
+            }
+        });
+    };
     // $(document).ready( function () {
     //     $('#vendorTable').DataTable();
     // } );

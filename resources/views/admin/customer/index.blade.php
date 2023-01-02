@@ -80,7 +80,7 @@
                                                         <div class="pb-4"><i class="fa fa-check" aria-hidden="true"></i></div>
                                                         <h3>Are You Sure ?</h3>
                                                         <div class="">
-                                                        <a href="{{ route('admin.customer.delete', $value->id) }}" class="btn btn-danger">Delete</a>
+                                                        <a href="{{ route('admin.customer.delete', $value->id) }}" class="btn btn-danger btn-sm">Delete</a>
                                                         </div>
                                                     </div>
                                                 </div>

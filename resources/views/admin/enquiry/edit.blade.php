@@ -29,11 +29,12 @@
                                         <div class="col-md input_field_width">
                                             <div class="form-group">
                                                 <select name="service_new[]" class="form-control" id="service0">
-                                                    <option value="">Select Service...</option>
+                                                    <option value="" class="selectService">Select Category.</option>
+                                                    {{-- <option value="">Select Service...</option>
                                                     @foreach($Service as $serdata)
                                                     <option value="{{ $serdata->id}}">{{ $serdata->name }}
                                                     </option>
-                                                    @endforeach
+                                                    @endforeach --}}
                                                 </select>
                                             </div>
                                         </div>
@@ -149,6 +150,7 @@
                                         <h4 class="text-center">Measurement Details</h4>
                                         {{-- <input type="hidden" id="details" value="{{ count($details) }}"> --}}
                                         @foreach($details as $key =>$data)
+                                           @if($data->service_id)
                                             <div class="customer_records row pt-2">
                                                 <div class="col-md input_field_width">
                                                     <input type="hidden" name="enquiry_details_id[]" value="{{ $data->id }}">
@@ -165,11 +167,11 @@
                                                 <div class="col-md input_field_width">
                                                     <div class="form-group">
                                                         <select name="service[]" id="service{{ $key+100 }}" class="form-control">
-                                                            <option value="">Select Service...</option>
-                                                            @foreach($Service as $serdata)
+                                                            <option value="{{ $data->service_id }}">{{ $data->services->name }}</option>
+                                                            {{-- @foreach($Service as $serdata)
                                                             <option value="{{ $serdata->id}}" {{ $data->service_id == $serdata->id ? 'selected' : ''}}>{{ $serdata->name }}
                                                             </option>
-                                                            @endforeach
+                                                            @endforeach --}}
                                                         </select>
                                                     </div>
                                                 </div>
@@ -201,11 +203,53 @@
                                                     <a href="{{ route('admin.enquiry.detailsDelete', $data->id) }}" class="btn-remove-customer btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></a>
                                                 </div>
                                             </div>
+                                            @endif
                                             @endforeach
                                             <div class="customer_records_dynamic"></div>
+                                            <div class="pt-2 text-end"><a class="extra-fields-customer btn btn-success" href="javascript:void(0)"><i class="fa fa-plus" aria-hidden="true"></i></a></div>
+
+                                            <br>
+                                            @if(count($extra))
+                                            <h4 class="text-center">Extra Details</h4>
+                                            @foreach($extra as $extraKey => $extradata)
+                                            <input type="hidden" name="extra_details_id[]" value="{{ $extradata->id }}">
+                                            <div class="row pt-2">
+                                                <div class="col-md input_field_width">
+                                                    <div class="form-group">
+                                                        <select name="extra[]" id="extra" class="form-control">
+                                                            <option value="" disabled selected>Choose Service</option>
+                                                            <option value="Transportation" {{ $extradata->extra_service == 'Transportation' ? "Selected": '' }}>Transportation</option>
+                                                            <option value="Iron Angle" {{ $extradata->extra_service == "Iron Angle"? "Selected": '' }}>Iron Angle</option>
+                                                            <option value="Scaffolding" {{ $extradata->extra_service == "Scaffolding"? "Selected": '' }}>Scaffolding</option>
+                                                            <option value="Timer" {{ $extradata->extra_service =="Timer" ? "Selected": '' }}>Timer</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-md-4">
+                                                    <div class="form-group">
+                                                        <input class="form-control" type="number" name="amount[]"
+                                                            placeholder="Amount" value="{{ $extradata->rate }}">
+                                                    </div>
+                                                </div>
+                                                <div class="col-auto">
+                                                    <a href="{{ route('admin.enquiry.detailsDelete', $extradata->id) }}" class="btn-remove-customer btn btn-danger"><i class="fa fa-trash" aria-hidden="true"></i></a>
+                                                </div>
+                                            </div>
+                                            @endforeach
+                                            <div class="extra_records_dynamic"></div>
+                                            <div class="pt-2 text-end"><a class="extra-service-add btn btn-success" href="javascript:void(0)"><i class="fa fa-plus" aria-hidden="true"></i></a></div>
+                                            @else
+                                            <div class="extra_records_dynamic"></div>
+                                                <div class="form-check text-end option_checkbox">
+                                                    <label class="form-check-label" for="">
+                                                        Are you want to add extra service ?
+                                                    </label>
+                                                    <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
+                                                </div>
+                                                <div class="pt-2 text-end add_service_btn" style="display: none"><a class="extra-service-add btn btn-success" href="javascript:void(0)"><i class="fa fa-plus" aria-hidden="true"></i></a></div>
+                                            @endif
                                             <ul class="list-inline pull-right">
-                                              <li><a class="extra-fields-customer btn btn-success" href="#"><i class="fa fa-plus" aria-hidden="true"></i></a></li>
-                                                <li><a  href="{{ route('admin.enquiry.index') }}" class="btn btn-warning">Back</a>
+                                                <li><a  href="{{ route('admin.enquiry.index') }}" class="btn btn-warning btn-sm">Back</a>
                                                 </li>
                                                 <li><button type="submit"
                                                         class="default-btn next-step">Continue</button></li>
@@ -221,11 +265,57 @@
         </div>
     </div>
 </div>
-
+<div class="row pt-2 Extra_service_records d-none">
+    <div class="col-md input_field_width">
+        <div class="form-group">
+            <select name="extra_new[]" id="extra" class="form-control">
+                <option value="" disabled selected>Choose Service</option>
+                <option value="Transportation">Transportation</option>
+                <option value="Iron Angle">Iron Angle</option>
+                <option value="Scaffolding">Scaffolding</option>
+                <option value="Timer">Timer</option>
+            </select>
+        </div>
+    </div>
+    <div class="col-md-4">
+        <div class="form-group">
+            <input class="form-control" type="number" name="amount_new[]"
+                placeholder="Amount">
+        </div>
+    </div>
+</div>
 @endsection
 @section('script')
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <script>
+    // $(document).ready(function(){ 
+    //     $("#flexCheckChecked").click(function() {
+    //         var test = $(this).val();
+    //         $(".add_service_btn").show();
+    //     }); 
+    // });
+    $(document).ready(function () { 
+        $("#flexCheckChecked").click(function() {
+        $(".add_service_btn:hidden").show('slow');
+        });
+        $("#flexCheckChecked").click(function(){
+        if($('#flexCheckChecked').prop('checked')===false) {
+            $('.add_service_btn').hide();}
+        });
+    });
+    $('.extra-service-add').click(function () {
+    $('.Extra_service_records').clone().appendTo('.extra_records_dynamic');
+    $('.extra_records_dynamic .Extra_service_records').addClass('single row');
+    $('.single .extra-service-add').remove();
+    $('.single').append(`<div class="col-auto remove-field"><a href="#" class="btn-remove-customer btn btn-danger"><i class="fa fa-minus" aria-hidden="true"></i></a></div>`);
+    $('.extra_records_dynamic > .single').attr("class", "row pt-3");
+    $('.extra_records_dynamic input').each(function () {
+        var count = 0;
+        var fieldname = $(this).attr("name");
+        $(this).attr('name', fieldname + count);
+        count++;
+    });
+});
     $(document).ready(function () {
         $("#emp_name").keyup(function () {
             var search = $('#emp_name').val.length
@@ -334,7 +424,7 @@
             $("#search_table div").addClass('display');
         });
     });
-function makeSubmenu(value, id) {
+    function makeSubmenu(value, id) {
         var lastChar = id.substring(8);
         if (value.length == 0){
             if(lastChar == 0){
