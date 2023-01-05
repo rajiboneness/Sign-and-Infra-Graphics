@@ -33,45 +33,50 @@
                                 <div class="customer_records row pt-2 d-none">
                                     <div class="col-md input_field_width">
                                         <div class="form-group">
-                                            <select name="category[]" id="category0" class="form-control category" onchange="makeSubmenu(this.value, this.id)" required>
+                                            <select name="category[]" id="category0" class="form-control category selectCategory" onchange="makeSubmenu(this.value, this.id)" required>
                                                 <option value="" disabled selected>Choose Category</option>
                                                 @foreach($Category as $catdata)
                                                 <option value="{{ $catdata->id}}">{{ $catdata->name }}
                                                 </option>
                                                 @endforeach
                                             </select>
+                                            <p class="errroCategory"></p>
                                         </div>
                                     </div>
                                     <div class="col-md input_field_width">
                                         <div class="form-group">
-                                            <select name="service[]" id="service0" class="form-control citySelect" required>
+                                            <select name="service[]" id="service0" class="form-control citySelect selectService" required>
                                                 <option value="" class="selectService">Select Category.</option>
                                             </select>
                                         </div>
                                     </div>
                                     <div class="col-md-2">
                                         <div class="form-group">
-                                            <input class="form-control" type="number" name="width[]"
+                                            <input class="form-control width" type="number" name="width[]"
                                                 placeholder="Width" required>
                                         </div>
+                                        <p class="errroWidth"></p>
                                     </div>
                                     <div class="col-md-2">
                                         <div class="form-group">
-                                            <input class="form-control" type="number" name="height[]"
+                                            <input class="form-control height" type="number" name="height[]"
                                                 placeholder="Height" required>
                                         </div>
+                                        <p class="errroHeight"> </p>
                                     </div>
                                     <div class="col-md-2">
                                         <div class="form-group">
-                                            <input class="form-control" type="text" name="quantity[]"
+                                            <input class="form-control quantity" type="text" name="quantity[]"
                                                 placeholder="Quantity" required>
                                         </div>
+                                        <p class="errroQuantity"> </p>
                                     </div>
                                     <div class="col-md-2">
                                         <div class="form-group">
-                                            <input class="form-control" type="number" name="rate[]"
+                                            <input class="form-control rate" type="number" name="rate[]"
                                                 placeholder="Rate" required>
                                         </div>
+                                        <p class="errroRate"> </p>
                                     </div>
                                 </div>
                                 <form method="post" action="{{ route('admin.enquiry.preview') }}" class="login-box" id="AddEnquiryForm">
@@ -103,7 +108,7 @@
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <div class="form-group">
-                                                        <label>Employee Name</label>
+                                                        <label class="form-label">Employee Name</label>
                                                         <input class="form-control" type="text" name="EmpName"
                                                             id="EmpName" placeholder="">
                                                     </div>
@@ -112,14 +117,14 @@
                                             <div class="row pt-4">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label>Phone Number *</label>
+                                                        <label class="form-label">Phone Number *</label>
                                                         <input class="form-control" type="number" name="EmpPhone"
                                                             id="EmpPhone" placeholder="">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label>Email Address *</label>
+                                                        <label class="form-label">Email Address *</label>
                                                         <input class="form-control" type="email" name="EmpEmail"
                                                             id="EmpEmail" placeholder="">
                                                     </div>
@@ -157,7 +162,7 @@
                                             <div class="row">
                                                 <div class="col-md-12">
                                                     <div class="form-group">
-                                                        <label>Customer Name</label>
+                                                        <label class="form-label">Customer Name</label>
                                                         <input class="form-control" type="text" name="customer_name"
                                                             id="cname" placeholder="">
                                                     </div>
@@ -166,14 +171,14 @@
                                             <div class="row pt-4">
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label>Phone Number *</label>
+                                                        <label class="form-label">Phone Number *</label>
                                                         <input class="form-control" type="number" name="customer_phone"
                                                             id="cphone" placeholder="">
                                                     </div>
                                                 </div>
                                                 <div class="col-md-6">
                                                     <div class="form-group">
-                                                        <label>Email Address *</label>
+                                                        <label class="form-label">Email Address *</label>
                                                         <input class="form-control" type="email" name="customer_email"
                                                             id="cemail" placeholder="">
                                                     </div>
@@ -188,56 +193,62 @@
                                         </div>
                                         <div class="tab-pane" role="tabpanel" id="step3">
                                             <h4 class="text-center">Measurement</h4>
-                                            <div class="row pt-2">
+                                            <div class="row pt-2 dynamic_row">
                                                 <div class="col-md input_field_width">
                                                     <div class="form-group">
-                                                        <select name="category[]" id="category20" class="form-control category" onchange="makeSubmenu(this.value, this.id)" required>
+                                                        <select name="category[]" id="category20" class="form-control category selectCategory" onchange="makeSubmenu(this.value, this.id)" required>
                                                             <option value="" disabled selected>Choose Category</option>
                                                             @foreach($Category as $catdata)
                                                             <option value="{{ $catdata->id}}">{{ $catdata->name }}
                                                             </option>
                                                             @endforeach
                                                         </select>
+                                                        <p class="errroCategory"></p>
                                                     </div>
                                                 </div>
                                                 <div class="col-md input_field_width">
                                                     <div class="form-group">
-                                                        <select name="service[]" id="service20" class="form-control citySelect" required>
+                                                        <select name="service[]" id="service20" class="form-control citySelect selectService" required>
                                                             <option value="" class="selectService">Select Category.</option>
                                                         </select>
+                                                        <p class="errroService"></p>
                                                     </div>
                                                 </div>
                                                 <div class="col-md-2">
                                                     <div class="form-group">
-                                                        <input class="form-control" type="number" name="width[]"
+                                                        <input class="form-control width" type="number" name="width[]"
                                                             placeholder="Width" required>
                                                     </div>
+                                                    <p class="errroWidth"></p>
                                                 </div>
                                                 <div class="col-md-2">
                                                     <div class="form-group">
-                                                        <input class="form-control" type="number" name="height[]"
+                                                        <input class="form-control height" type="number" name="height[]"
                                                             placeholder="Height" required>
                                                     </div>
+                                                    <p class="errroHeight"> </p>
                                                 </div>
                                                 <div class="col-md-2">
                                                     <div class="form-group">
-                                                        <input class="form-control" type="text" name="quantity[]"
+                                                        <input class="form-control quantity" type="text" name="quantity[]"
                                                             placeholder="Quantity" required>
                                                     </div>
+                                                    <p class="errroQuantity"></p>
                                                 </div>
                                                 <div class="col-md-2">
                                                     <div class="form-group">
-                                                        <input class="form-control" type="number" name="rate[]"
+                                                        <input class="form-control rate" type="number" name="rate[]"
                                                             placeholder="Rate" required>
                                                     </div>
+                                                    <p class="errroRate"></p>
                                                 </div>
                                             </div>
                                             <div class="customer_records_dynamic"></div>
-                                            <ul class="list-inline pull-right">
+                                            <ul class="list-inline pull-right MeasurementBtnClass">
                                               <li><a class="extra-fields-customer btn btn-success" href="javascript:void(0)"><i class="fa fa-plus" aria-hidden="true"></i></a></li>
                                                 <li><button type="button" class="default-btn prev-step btn-sm">Back</button>
                                                 </li>
-                                                <li><button type="button" class="default-btn next-step">Continue to
+                                                <li><button type="button" class="default-btn btn btn-sm" id="MeasurementBtn">Continue to
                                                     next step</button></li>
                                             </ul>
                                         </div>
@@ -318,6 +329,50 @@
 
  
 <script>
+     $('#MeasurementBtn').on('click', function () {
+        // var count = $('.dynamic_row').length;
+        // alert(count);
+        $('.dynamic_row').each(function(){
+                var selectCategory = $(this).find('.selectCategory').val();
+                var selectService = $(this).find('.selectService').val();
+                var width = $(this).find('.width').val();
+                var height = $(this).find('.height').val();
+                var quantity = $(this).find('.quantity').val();
+                var rate = $(this).find('.rate').val();
+                $(this).find('.errroCategory').html("");
+                $(this).find('.errroService').html("");
+                $(this).find('.errroWidth').html("");
+                $(this).find('.errroHeight').html("");
+                $(this).find('.errroQuantity').html("");
+                $(this).find('.errroRate').html("");
+                if(selectCategory == null || selectService == "" || width == "" || height == "" || quantity == "" || rate == ""){
+                    if(selectCategory == null){
+                        $(this).find('.errroCategory').html("<span style='color: red; font-size: 13px;letter-spacing: 1px;'>Select category !</span>");
+                    }
+                    if(selectService == ""){
+                        $(this).find('.errroService').html("<span style='color: red; font-size: 13px;letter-spacing: 1px;'>Select Service !</span>");
+                    }
+                    if(width == ""){
+                        $(this).find('.errroWidth').html("<span style='color: red; font-size: 13px;letter-spacing: 1px;'>Add Width!</span>");
+                    }
+                    if(height == ""){
+                        $(this).find('.errroHeight').html("<span style='color: red; font-size: 13px;letter-spacing: 1px;'>Add height!</span>");
+                    }
+                    if(quantity == ""){
+                        $(this).find('.errroQuantity').html("<span style='color: red; font-size: 13px;letter-spacing: 1px;'>Add Quantity!</span>");
+                    }
+                    if(rate == ""){
+                        $(this).find('.errroRate').html("<span style='color: red; font-size: 13px;letter-spacing: 1px;'>Add Rate!</span>");
+                    }
+                }else{
+                    var active = $('.wizard .nav-tabs li.active');
+                    active.next().removeClass('disabled');
+                    nextTab(active);
+                }
+        //  alert(selectService);
+        });
+     });
+
     $('#ExtraServiceAdd').click(function(e) {
         e.preventDefault();
         if($('#extraService').val() == null){
@@ -435,11 +490,11 @@ $('.extra-service-add').click(function () {
             $('.customer_records_dynamic .customer_records').addClass('single row');
             $('.single .extra-fields-customer').remove();
             $('.single').append(`<div class="col-auto remove-field"><a href="#" class="btn-remove-customer btn btn-danger"><i class="fa fa-minus" aria-hidden="true"></i></a></div>`);
-            $('.customer_records_dynamic > .single').attr("class", "row pt-3");
+            $('.customer_records_dynamic > .single').attr("class", "row pt-3 dynamic_row");
             $('.customer_records_dynamic input').each(function () {
                 var count = 0;
                 var fieldname = $(this).attr("name");
-                $(this).attr('name', fieldname + count);
+                $(this).attr('name', fieldname);
                 count++;
             });
             $(`#category${sl-1}`).attr("id",  `category${sl++}`);

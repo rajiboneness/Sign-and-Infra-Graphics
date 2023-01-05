@@ -4,7 +4,58 @@
         <div class="row g-4">
             <div class="col-12 col-md-12">
                 <div class="bg-white rounded h-100 p-4">
-                   
+                    <div class="row">
+                        <div class="col-md-7 col-12">
+                            <form action="{{ route('admin.enquiry.index') }}" method="get" id="indexSubmit">
+                                @csrf
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <label class="form-label">Start Date</label>
+                                        <input type="date" class="form-control" name="start_date" id="startDate" value="{{ isset($startDate) ? $startDate : '' }}">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label class="form-label">End Date</label>
+                                        <input type="date" class="form-control" name="end_date" id="EndDate" value="{{ isset($endDate) ? $endDate : '' }}">
+                                    </div>
+                                    <div class="col-md-4" id="enquiry_page">
+                                        <label class="form-label">Status</label>
+                                        <select name="exportstatus" id="selectexportstatus" class="form-control">
+                                            <option value="10" selected>Select Status</option>
+                                            <option value="1" {{ $exportstatus == 1 ? 'Selected' : '' }}>New</option>
+                                            <option value="2" {{ $exportstatus == 2 ? 'Selected' : '' }}>Outgoing</option>
+                                            <option value="3" {{ $exportstatus == 3 ? 'Selected' : '' }}>Quotation Provided</option>
+                                            <option value="4" {{ $exportstatus == 4 ? 'Selected' : '' }}>Order Generated</option>
+                                            <option value="0" {{ $exportstatus == 0 ? 'Selected' : '' }}>Cancelled</option>
+                                            <option value="all" {{ $exportstatus == 'all' ? 'Selected' : '' }}>Select All</option>
+                                        </select>
+                                    </div>
+                                    {{-- {{ dd($exportstatus) }} --}}
+                                        <div class="col-md-1 submit_btn">
+                                            <button class="btn btn-sm btn btn-primary" id="exportSubmit">Submit</button>
+                                        </div>
+                                </div>
+                            </form>
+                        </div>
+                        @if(!empty($startDate) || $exportstatus<10)
+                            <div class="col-md-5 col-12">
+                                <div class="row">
+                                    <div class="col-md-2 submit_btn mx-3">
+                                        <a href="{{ route('admin.enquiry.index') }}" class="btn btn-warning btn-sm">Clear</a>
+                                    </div>
+                                    <div class="col-md-2 submit_btn">
+                                        <form action="{{ route('admin.enquiry.export') }}" method="POST">
+                                            @csrf
+                                        <input type="hidden" name="startDate" value="{{ $startDate }}">
+                                        <input type="hidden" name="EndDate" value="{{ $endDate }}">
+                                        <input type="hidden" name="exportstatus" id="exportstatus" value="{{ $exportstatus }}">
+                                        <button type="submit" class="btn btn-sm btn btn-primary">Export</button>
+                                    </form>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        @endif
+                    </div>
                     <div class="bg-white pt-4 px-4">
                         <div class="row">
                             <div class="col-md-2">
@@ -160,11 +211,36 @@
         </div>
     </div>
   
-  
+    <div class="modal fade" id="StatusModal" tabindex="-1" aria-hidden="true">
+        <div class="modal-dialog alertModal modal-dialog-centered modal-sm">
+            <div class="modal-content">
+                <div class="pb-4"><i class="fa fa-exclamation-triangle" aria-hidden="true"></i></div>
+                <p id="alert_content">Are You Sure ?</p>
+            </div>
+        </div>
+    </div>
 @endsection
 @section('script')
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"></script>
 <script>
+    $('#exportSubmit').on('click', function (event) {
+        event.preventDefault();
+        var selectexportstatus = $('#selectexportstatus').val();
+        if(selectexportstatus =="all"){
+            var startDate = $('#startDate').val();
+            var EndDate = $('#EndDate').val();
+            if(startDate == "" && EndDate == ""){
+                $('#alert_content').text('Please Select Start Date & End Date !');
+                $('#StatusModal').modal('show')
+                return exit();
+            }else{
+               $("#indexSubmit").submit();
+            }
+        }else{
+            $("#indexSubmit").submit();
+        }
+        //Some code
+    });
     function makeSubmenu(data, value) {
         $.ajax({
             url: "{{ route('admin.enquiry.status') }}",

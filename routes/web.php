@@ -66,14 +66,14 @@ Route::prefix('admin')->name('admin.')->group(function(){
             Route::get('/{id}/status', 'Admin\EmployeeController@status')->name('status');
             Route::get('/{id}/delete', 'Admin\EmployeeController@destroy')->name('delete');
         });
-        Route::prefix('invoice')->name('invoice.')->group(function(){
-            Route::get('/', 'Admin\EnquiryController@allInvoice')->name('index');
-        });
+    
         // Enquiry
         Route::prefix('enquiry')->name('enquiry.')->group(function(){
             Route::get('/', 'Admin\EnquiryController@index')->name('index');
             Route::get('/add', 'Admin\EnquiryController@add')->name('add');
             Route::post('/ajaxsearch', 'Admin\EnquiryController@ajaxsearch')->name('ajaxsearch');
+            Route::post('/customer', 'Admin\EnquiryController@customer')->name('customer');
+            Route::post('/employee', 'Admin\EnquiryController@employee')->name('employee');
             Route::post('/employeesearch', 'Admin\EnquiryController@employeesearch')->name('employeesearch');
             Route::post('/category_wise_service', 'Admin\EnquiryController@category_wise_service')->name('category_wise_service');
             Route::post('/store', 'Admin\EnquiryController@store')->name('store');
@@ -94,7 +94,14 @@ Route::prefix('admin')->name('admin.')->group(function(){
             Route::post('/invoice-update', 'Admin\EnquiryController@InvoiceUpdate')->name('invoice-update');
             Route::get('/{id}/quotation-status', 'Admin\EnquiryController@QuotationStatus')->name('quotation-status');
             Route::post('/quotation-store', 'Admin\EnquiryController@QuotationStore')->name('quotation-store');
+            Route::post('/export', 'Admin\EnquiryController@Export')->name('export');
             Route::get('/report', 'Admin\EnquiryController@report')->name('report');
+            Route::post('/report-export', 'Admin\EnquiryController@reportExport')->name('report-export');
+        });
+        // Invoice
+        Route::prefix('invoice')->name('invoice.')->group(function(){
+            Route::get('/', 'Admin\InvoiceController@allInvoice')->name('index');
+            Route::post('/export', 'Admin\InvoiceController@exportData')->name('export');
         });
     });
 });

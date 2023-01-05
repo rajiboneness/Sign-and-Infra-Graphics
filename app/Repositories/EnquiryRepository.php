@@ -27,6 +27,16 @@ class EnquiryRepository implements EnquiryInterface
         ->orWhere('customer_code', 'like', $query . '%')->first();
         return $data;
     }
+    public function EnquiryCustomerSearch($query)
+    {
+        $data = Enquiry::where('name', 'like', '%' .$query . '%')->first();
+        return $data;
+    }
+    public function EnquiryEmployeeSearch($query)
+    {
+        $data = Enquiry::where('emp_name', 'like', '%' .$query . '%')->first();
+        return $data;
+    }
     public function EmployeeDataSearch($query)
     {
         $data = Employee::orWhere('fname', 'like', $query . '%')
@@ -227,9 +237,7 @@ class EnquiryRepository implements EnquiryInterface
 
     // Invoice Management
 
-    public function GetAllInvoice(){
-        return Invoice::latest('id')->get();
-    }
+    
     public function EnquiryIdWiseNotes($id){
         $getDetails = Note::where('enquiry_id', $id)->latest('id')->get();
         return $getDetails;
@@ -251,6 +259,71 @@ class EnquiryRepository implements EnquiryInterface
         $update->notes = $collection['notes'];
         $update->save();
         return $update;
+    }
+    public function DateWiseReportData(array $data){
+        $collectedData = collect($data);
+        // dd($collectedData);
+        if(!$collectedData['customer_name'] ==null){
+            $cneme = $collectedData['customer_name'];
+            $allData = Enquiry::where('name', $cneme)->where('quotation', 1)->get();
+            return $allData;
+        }elseif(!$collectedData['employee_name'] ==null){
+            $eneme = $collectedData['employee_name'];
+            $allData = Enquiry::where('emp_name', $eneme)->where('quotation', 1)->get();
+            return $allData;
+        }else{
+            $endDate=$startDate="";
+            $collectedData = collect($data);
+            $from = $collectedData['start_date'];
+            $startDate=$from;
+            $from=$from." 00:00:00";
+            $to = $collectedData['end_date'];
+            $endDate=$to;
+            $to=$to." 23:59:59";
+            $allData = Enquiry::where('created_at', '>=', $from)->where('created_at', '<=', $to)->where('quotation', 1)->get();
+            return $allData;
+        }
+        
+        
+    }
+    public function DateStatusWiseData(array $data){
+        
+        $collectedData = collect($data);
+        // dd($collectedData);
+        if($collectedData['exportstatus'] == "all"){
+            $endDate=$startDate="";
+            $from = $collectedData['start_date'];
+            $startDate=$from;
+            $from=$from." 00:00:00";
+            $to = $collectedData['end_date'];
+            $endDate=$to;
+            $to=$to." 23:59:59";
+            $allData = Enquiry::where('created_at', '>=', $from)->where('created_at', '<=', $to)->paginate(100);
+        }elseif(isset($collectedData['exportstatus']) && $collectedData['exportstatus'] != "all" && $collectedData['start_date'] == null){
+            $exportstatus = $collectedData['exportstatus'];
+            $allData = Enquiry::where('status', $exportstatus)->paginate(100);
+        }elseif(isset($collectedData['start_date']) && $collectedData['exportstatus'] == 10){
+            // $exportstatus = $collectedData['exportstatus'];
+            $endDate=$startDate="";
+            $from = $collectedData['start_date'];
+            $startDate=$from;
+            $from=$from." 00:00:00";
+            $to = $collectedData['end_date'];
+            $endDate=$to;
+            $to=$to." 23:59:59";
+            $allData = Enquiry::where('created_at', '>=', $from)->where('created_at', '<=', $to)->paginate(100);
+        }else{
+            $exportstatus = $collectedData['exportstatus'];
+            $endDate=$startDate="";
+            $from = $collectedData['start_date'];
+            $startDate=$from;
+            $from=$from." 00:00:00";
+            $to = $collectedData['end_date'];
+            $endDate=$to;
+            $to=$to." 23:59:59";
+            $allData = Enquiry::where('created_at', '>=', $from)->where('created_at', '<=', $to)->where('status', $exportstatus)->paginate(100);
+        }
+        return $allData;
     }
    
 }

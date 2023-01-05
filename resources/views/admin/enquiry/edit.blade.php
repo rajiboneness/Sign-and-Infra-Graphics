@@ -63,13 +63,16 @@
                                             </div>
                                         </div>
                                     </div>
-                                        <h4 class="text-center">Employee Details</h4>
+                                        {{-- <h4 class="text-center">Employee Details</h4> --}}
+                                        <div class="text-center">
+                                            <span class="enquiry_edit_span">Employee Details</span>
+                                        </div>
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <label>Employee Name</label>
+                                                    <label class="form-label">Employee Name</label>
                                                     <input class="form-control" type="text" name="emp_name"
-                                                        id="emp_name" placeholder="" value="{{ $Enquiry->emp_name }}" >
+                                                        id="emp_name" placeholder="Search by employee name & phone" value="{{ $Enquiry->emp_name }}" >
                                                         <div id="search_Emp_table" class="search_Emp_table">
                                                             <div>
                                                                 <table class="table borderless">
@@ -90,26 +93,29 @@
                                         <div class="row pt-2">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label>Phone Number *</label>
+                                                    <label class="form-label">Phone Number *</label>
                                                     <input class="form-control" type="text" name="emp_phone"
                                                         id="emp_phone" placeholder="" value="{{ $Enquiry->emp_phone }}">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label>Email Address *</label>
+                                                    <label class="form-label">Email Address *</label>
                                                     <input class="form-control" type="email" name="emp_email"
                                                         id="emp_email" placeholder="" value="{{ $Enquiry->emp_email }}">
                                                 </div>
                                             </div>
                                         </div>
-                                        <h4 class="text-center mt-4">Customer Details</h4>
+                                        {{-- <h4 class="text-center mt-4">Customer Details</h4> --}}
+                                       <div class="text-center pt-4">
+                                            <span class="enquiry_edit_span">Customer Details</span>
+                                       </div>
                                         <div class="row">
                                             <div class="col-md-12">
                                                 <div class="form-group">
-                                                    <label>Customer Name</label>
+                                                    <label class="form-label">Customer Name</label>
                                                     <input class="form-control" type="text" name="customer_name"
-                                                        id="cname" placeholder="" value="{{ $Enquiry->name }}">
+                                                        id="cname" placeholder="Search by customer name & phone" value="{{ $Enquiry->name }}">
                                                     <div id="search_table" class="search_table">
                                                         <div>
                                                             <table class="table borderless">
@@ -133,21 +139,24 @@
                                         <div class="row pt-2">
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label>Phone Number *</label>
+                                                    <label class="form-label">Phone Number *</label>
                                                     <input class="form-control" type="text" name="customer_phone"
                                                         id="cphone" placeholder="" value="{{ $Enquiry->phone }}">
                                                 </div>
                                             </div>
                                             <div class="col-md-6">
                                                 <div class="form-group">
-                                                    <label>Email Address *</label>
+                                                    <label class="form-label">Email Address *</label>
                                                     <input class="form-control" type="email" name="customer_email"
                                                         id="cemail" placeholder="" value="{{ $Enquiry->email }}">
                                                 </div>
                                             </div>
                                         </div>
                                         <br>
-                                        <h4 class="text-center">Measurement Details</h4>
+                                        {{-- <h4 class="text-center">Measurement Details</h4> --}}
+                                       <div class="text-center">
+                                        <span class="enquiry_edit_span">Measurement Details</span>
+                                       </div>
                                         {{-- <input type="hidden" id="details" value="{{ count($details) }}"> --}}
                                         @foreach($details as $key =>$data)
                                            @if($data->service_id)
@@ -210,7 +219,10 @@
 
                                             <br>
                                             @if(count($extra))
-                                            <h4 class="text-center">Extra Details</h4>
+                                            {{-- <h4 class="text-center">Extra Details</h4> --}}
+                                            <div class="text-center">
+                                                <span class="enquiry_edit_span">Extra Details</span>
+                                            </div>
                                             @foreach($extra as $extraKey => $extradata)
                                             <input type="hidden" name="extra_details_id[]" value="{{ $extradata->id }}">
                                             <div class="row pt-2">

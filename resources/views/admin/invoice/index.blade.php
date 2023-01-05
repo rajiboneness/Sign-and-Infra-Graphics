@@ -4,7 +4,50 @@
         <div class="row g-4">
             <div class="col-12 col-md-12">
                 <div class="bg-white rounded h-100 p-4">
-                   
+                    <div class="row">
+                        <div class="col-md-8 col-12">
+                            <form action="{{ route('admin.invoice.index') }}" method="get">
+                                @csrf
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        <label class="form-label">Start Date</label>
+                                        <input type="date" class="form-control" name="start_date" value="{{ isset($startDate) ? $startDate : '' }}">
+                                    </div>
+                                    <div class="col-md-3">
+                                        <label class="form-label">End Date</label>
+                                        <input type="date" class="form-control" name="end_date" value="{{ isset($endDate) ? $endDate : '' }}">
+                                    </div>
+                                    <div class="col-md-4">
+                                        <label class="form-label">Invoice Code</label>
+                                        <input type="text" class="form-control" name="invoice_code" value="{{ isset($invoice_code) ? $invoice_code : '' }}" placeholder="Invoice Code">
+                                    </div>
+                                    <div class="col-md-2 submit_btn">
+                                        <button type="submit" class="btn btn-success btn-sm">Submit</button>
+                                    </div>
+                                </div>
+                            </form>
+                        </div>
+                        @if(!empty($startDate) || !empty($invoice_code))
+                            <div class="col-md-4 col-12">
+                                <div class="row">
+                                    <div class="col-md-4 submit_btn mr-3">
+                                        <a href="{{ route('admin.invoice.index') }}" class="btn btn-warning btn-sm">Clear</a>
+                                    </div>
+                                    <div class="col-md-6 submit_btn">
+                                        <form action="{{ route('admin.invoice.export') }}" method="POST">
+                                            @csrf
+                                        <input type="hidden" name="startDate" value="{{ $startDate }}">
+                                        <input type="hidden" name="EndDate" value="{{ $endDate }}">
+                                        <input type="hidden" name="invoiceCode" value="{{ $invoice_code }}">
+                                        <button type="submit" class="btn btn-success btn-sm">Export</button>
+                                    </form>
+                                    </div>
+                                    
+                                </div>
+                            </div>
+                        @endif
+                    </div>
+                    
                     <div class="bg-white pt-4 px-4">
                         <div class="row">
                             <div class="col-md-2">
@@ -34,22 +77,6 @@
                                         <td>{{ $key+1 }}</td>
                                         <td>
                                             <p style="overflow: hidden;text-overflow: ellipsis;margin-bottom: 0;">{{ $value->invoice_code }}</p>
-                                            {{-- <div class="row__action">
-                                                <a href="{{ route('admin.employee.edit', $value->id) }}">Edit </a><span>|</span>
-                                                <a href="javascript:void(0)" class="text-danger" data-bs-toggle="modal" data-bs-target="#deleteModal{{ $key+1 }}"> delete</a>                                                
-                                            </div>
-                                            <!-- Delete Modal -->
-                                            <div class="modal fade" id="deleteModal{{ $key+1 }}" tabindex="-1" aria-hidden="true">
-                                                <div class="modal-dialog deleteModal modal-dialog-centered modal-sm">
-                                                    <div class="modal-content">
-                                                        <div class="pb-4"><i class="fa fa-check" aria-hidden="true"></i></div>
-                                                        <h3>Are You Sure ?</h3>
-                                                        <div class="">
-                                                        <a href="{{ route('admin.employee.delete', $value->id) }}" class="btn btn-danger">Delete</a>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div> --}}
                                         </td>
                                         <td>{{ $value->customers->fname.' '.$value->customers->lname}}<br>{{ $value->customers->phone }}
                                         <br>{{ $value->customers->email }}

@@ -16,7 +16,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="table-responsive enquiry_table">
+                    <div class="table-responsive">
                         <span class="customer_span enquiry_notes">Enquiry Notes</span>
                         <table class="table">
                             {{-- <thead>
@@ -61,7 +61,7 @@
                                                             <div class="modal-body">
                                                                     @csrf
                                                                     <input type="hidden" class="form-control" id="enquiry_id" name="enquiry_id" value="{{ $id }}">
-                                                                    <input type="text" class="form-control" id="notes" name="notes" value="{{ $value->notes }}">
+                                                                    <textarea id="notes" name="notes" cols="10" rows="3" class="form-control">{{ $value->notes }}</textarea>
                                                             </div>
                                                             <div class="modal-footer">
                                                             <button type="submit" class="btn btn-primary btn-sm">Update changes</button>
@@ -99,7 +99,7 @@
                     <div class="modal-body">
                             @csrf
                             <input type="hidden" class="form-control" id="enquiry_id" name="enquiry_id" value="{{ $id }}">
-                            <input type="text" class="form-control" id="notes" name="notes">
+                            <textarea id="notes" name="notes" cols="10" rows="3" class="form-control"></textarea>
                     </div>
                     <div class="modal-footer">
                     <button type="submit" class="btn btn-primary btn-sm">Save changes</button>

@@ -742,6 +742,11 @@ body{
         background-color: #12b07f;
         color: #fff;
     }
+    #MeasurementBtn {
+        background-color: #12b07f;
+        color: #fff;
+        margin-bottom: 4px;
+    }
 
     #enquiry_page .step-head {
         font-size: 20px;
@@ -899,6 +904,36 @@ body{
         cursor: not-allowed!important;
         pointer-events: none!important;
     } 
+    .submit_btn{
+        padding-top: 22px;
+    }
+
+    .enquiry_edit_span{
+        color: #12b07f;
+        letter-spacing: 2px;
+        font-size: 15px;
+        padding-bottom: 10px;
+        font-weight: 900;
+    }
+    .customrrData {
+        display: inline-block;
+        padding: 10px 20px;
+        margin-top: 10px!important;
+        background: #F3F6F9;
+        cursor: pointer;
+    }
+    .report_export_btn{
+        padding-top: 56px;
+        padding-left: 21px;
+    }
+    .placeholder{
+        font-size: 10px;
+        height: 66%!important;
+    }
+    .placeholder:focus{
+        font-size: 10px;
+        height: 66%!important;
+    }
     @media (max-width: 767px) {
         #enquiry_page .sign-content h3 {
             font-size: 40px;

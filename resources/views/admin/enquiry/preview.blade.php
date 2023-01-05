@@ -11,8 +11,8 @@
                                 <span class="customer_span">Customer</span>
                                 <h2>{{ $data['customer_name'] }}</h2>
                             </div>
-                            <span class="text-muted fs"> Mobile : {{ $data['EmpPhone'] }}</span><br>
-                            <span class="text-muted fs"> Email : {{ $data['EmpEmail'] }}</span><br>
+                            <span class="text-muted fs"> Mobile : {{ $data['customer_phone'] }}</span><br>
+                            <span class="text-muted fs"> Email : {{ $data['customer_email'] }}</span><br>
                         </div>
                     </div>
                 </div>
@@ -21,10 +21,10 @@
                         <div class="col-md-12">
                             <div class="details_cardhead">
                                 <span class="customer_span">Employee</span>
-                                <h2>{{ $data['customer_name'] }}</h2>
+                                <h2>{{ $data['EmpName'] }}</h2>
                             </div>
-                            <span class="text-muted fs"> Email : {{  $data['customer_phone']  }}</span><br>
-                            <span class="text-muted fs"> Mobile : {{  $data['customer_email'] }}</span>
+                            <span class="text-muted fs"> Email : {{  $data['EmpPhone']  }}</span><br>
+                            <span class="text-muted fs"> Mobile : {{  $data['EmpEmail'] }}</span>
                         </div>
                     </div>
                 </div>

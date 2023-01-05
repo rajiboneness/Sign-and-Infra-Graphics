@@ -19,9 +19,40 @@ class EnquiryController extends Controller
         $this->EnquiryRepository = $EnquiryRepository;
     }
 
-    public function index(){
-        $Enquiry = Enquiry::latest()->paginate(10);
-        return view('admin.enquiry.index', compact('Enquiry'));
+    public function index(Request $request){
+        
+        $data = array();
+        $startDate = '';
+        $endDate = '';
+        $exportstatus = 10;
+        if(isset($request->start_date) && $request->exportstatus == 'all'){
+            $params = $request->all();
+            $Enquiry = $this->EnquiryRepository->DateStatusWiseData($params);
+            $startDate = $request->start_date;
+            $endDate = $request->end_date;
+            $exportstatus = $request->exportstatus;
+         }elseif($request->exportstatus!=10  && isset($request->start_date)){ 
+            //  dd($request->all());
+            $params = $request->all();
+            $Enquiry = $this->EnquiryRepository->DateStatusWiseData($params);
+            $exportstatus = $request->exportstatus;
+            $startDate = $request->start_date;
+            $endDate = $request->end_date;
+         }elseif($request->exportstatus==10  && isset($request->start_date)){ 
+           $params = $request->all();
+           $Enquiry = $this->EnquiryRepository->DateStatusWiseData($params);
+           $exportstatus = $request->exportstatus;
+           $startDate = $request->start_date;
+           $endDate = $request->end_date;
+        }elseif(isset($request->exportstatus)){
+            $params = $request->all();
+            $Enquiry = $this->EnquiryRepository->DateStatusWiseData($params);
+            $exportstatus = $request->exportstatus;
+         }else{
+            $Enquiry = Enquiry::latest()->paginate(10);
+         }
+        //  dd($startDate, $exportstatus);
+        return view('admin.enquiry.index', compact('Enquiry', 'startDate', 'endDate', 'exportstatus'));
     }
     public function add(){
         $Category = Category::where('status', 1)->get();
@@ -34,6 +65,24 @@ class EnquiryController extends Controller
         if(!$FetchData == null){
             $customer_name = $FetchData->fname.' '.$FetchData->lname;
             return response()->json(['status' => 200, 'id'=>$FetchData->id, 'customer_code'=>$FetchData->customer_code, 'customer_name'=>$customer_name, 'email'=>$FetchData->email,'phone'=>$FetchData->phone]);
+        }else{
+            return response()->json(['status' => 400, 'message' => 'Data Not Found !']);
+        }
+    }
+    public function customer(Request $request){
+        $query = $request['query'];
+        $FetchData = $this->EnquiryRepository->EnquiryCustomerSearch($query);
+        if(!$FetchData == null){
+            return response()->json(['status' => 200, 'customer_name'=>$FetchData->name]);
+        }else{
+            return response()->json(['status' => 400, 'message' => 'Data Not Found !']);
+        }
+    }
+    public function employee(Request $request){
+        $query = $request['query'];
+        $FetchData = $this->EnquiryRepository->EnquiryEmployeeSearch($query);
+        if(!$FetchData == null){
+            return response()->json(['status' => 200, 'employee_name'=>$FetchData->emp_name]);
         }else{
             return response()->json(['status' => 400, 'message' => 'Data Not Found !']);
         }
@@ -296,15 +345,137 @@ class EnquiryController extends Controller
             return redirect()->route('admin.enquiry.notes', $getInvoice->enquiry_id);
         }
     }
-    public function report(){
-        $getEnquiry = Enquiry::where('quotation', 1)->get();
-        return view('admin.enquiry.report', compact('getEnquiry'));
+    public function report(Request $request){
+        
+        $getEnquiry = array();
+        $startDate = 0;
+        $endDate = 0;
+        $cname = 0;
+        $ename = 0;
+        if(isset($request->start_date)){
+            $params = $request->all();
+            $getEnquiry = $this->EnquiryRepository->DateWiseReportData($params);
+            $startDate = $request->start_date;
+            $endDate = $request->end_date;
+         }elseif(isset($request->customer_name)){
+            $params = $request->all();
+            $cname = $request->customer_name;
+            $getEnquiry = $this->EnquiryRepository->DateWiseReportData($params);
+         }elseif(isset($request->employee_name)){
+            //  dd('HERE');
+            $params = $request->all();
+            $ename = $request->employee_name;
+            $getEnquiry = $this->EnquiryRepository->DateWiseReportData($params);
+         }else{
+            $getEnquiry = Enquiry::where('quotation', 1)->get();
+         }
+        //  dd($startDate, $cname);
+        return view('admin.enquiry.report', compact('getEnquiry', 'startDate', 'endDate', 'cname', 'ename'));
+    }
+    public function Export(Request $request){
+        if(isset($request->startDate) && $request->exportstatus == 'all'){
+            // dd($request->all());
+            $data = array("start_date" => "$request->startDate", "end_date"=>"$request->EndDate", "exportstatus"=>"$request->exportstatus");
+            $Exportdata = $this->EnquiryRepository->DateStatusWiseData($data);
+        }elseif($request->exportstatus!=10  && isset($request->startDate)){
+            // dd($request->all());
+            $data = array("start_date" => "$request->startDate", "end_date"=>"$request->EndDate", "exportstatus"=>"$request->exportstatus");
+            $Exportdata = $this->EnquiryRepository->DateStatusWiseData($data);
+        }elseif($request->exportstatus==10  && isset($request->startDate)){
+            $data = array("start_date" => "$request->startDate", "end_date"=>"$request->EndDate", "exportstatus"=>"");
+            $Exportdata = $this->EnquiryRepository->DateStatusWiseData($data);
+        }elseif(isset($request->exportstatus)){
+            $data = array("start_date" => "", "end_date"=>"", "exportstatus"=>"$request->exportstatus");
+            $Exportdata = $this->EnquiryRepository->DateStatusWiseData($data);
+        }else{
+            $data = array("start_date" => "$request->startDate", "end_date"=>"$request->EndDate", "exportstatus"=>"");
+            $Exportdata = $this->EnquiryRepository->DateStatusWiseData($data);
+        }
+        if (count($Exportdata) > 0) {
+            $delimiter = ",";
+            $filename = "SAIG-Enquiry-List-".date('Y-m-d').".csv"; 
+            // Create a file pointer 
+            $f = fopen('php://memory', 'w');
+             // Set column headers 
+             $fields = array('SR', 'Customer Name', 'Customer Mobile', 'Customer Email', 'Employee Name', 'Employee Mobile', 'Employee Email', 'Status',  'Date');  
+             fputcsv($f, $fields, $delimiter);
+             $count = 1;  
+            foreach($Exportdata as $row) {
+                $statusdata = $row['status'];
+                switch ($statusdata) {
+                case "0":
+                    $status = "Cancelled";
+                    break;
+                case "1":
+                    $status = "New";
+                    break;
+                case "2":
+                    $status = "Ongoing";
+                    break;
+                case "3":
+                    $status = "Quotation Provided";
+                    break;
+                default:
+                    $status = "Order Generated";
+                }
+                // dd($getenquiryDetails);
+                $datetime = date('j F, Y h:i A', strtotime($row['created_at']));
+                $lineData = array($count, $row['name'],$row['phone'], $row['email'], $row['emp_name'],  $row['emp_phone'], $row['emp_email'], $status, $datetime);
+                fputcsv($f, $lineData, $delimiter);
+                $count++;
+            }
+            // Move back to beginning of file
+            fseek($f, 0);
+            // Set headers to download file rather than displayed
+            header('Content-Type: text/csv');
+            header('Content-Disposition: attachment; filename="' . $filename . '";');
+            //output all remaining data on a file pointer
+            fpassthru($f);
+        }
+    }
+    public function reportExport(Request $request){
+        // dd($request->all());
+        if(!$request->customerName==0){
+            $data = array("customer_name" => "$request->customerName", "employee_name"=>"");
+            $Exportdata = $this->EnquiryRepository->DateWiseReportData($data);
+        }elseif(!$request->employeeName==0){
+            $data = array("employee_name" => "$request->employeeName","customer_name"=>"");
+            $Exportdata = $this->EnquiryRepository->DateWiseReportData($data);
+        }else{
+            $data = array("start_date" => "$request->startDate", "end_date"=>"$request->EndDate", "customer_name"=>"", "employee_name"=>"");
+            $Exportdata = $this->EnquiryRepository->DateWiseReportData($data);
+        }
+        if (count($Exportdata) > 0) {
+            $delimiter = ",";
+            $filename = "SAIG-Report-List-".date('Y-m-d').".csv"; 
+            // Create a file pointer 
+            $f = fopen('php://memory', 'w');
+             // Set column headers 
+                $fields = array('SR', 'Date', 'Customer Name', 'Employee Name', 'Quotation Date', 'Quotation Amount(GST)', 'Invoice Generate', 'Invoice Amount(GST)', 'Invoice Date'); 
+             fputcsv($f, $fields, $delimiter);
+             $count = 1;  
+            foreach($Exportdata as $row) {
+                $getQuotation = Quotation::where('enquiry_id', $row['id'])->first();
+                $getInvoice = Invoice::where('enquiry_id', $row['id'])->first();
+                $invoice = $row['invoice'] == 1 ? "Yes" : "No";
+                $InvoiceAmount = $row['invoice'] == 1 ? 'Rs '.$getInvoice->total_amount.'('.$getInvoice->gst.')' : "Rs. 00.00";
+                $invoiceDate = $row['invoice'] == 1 ? $getInvoice->created_at : ".....................";
+                $Enquiry = Enquiry::where('id', $row->enquiry_id)->first();
+                $datetime = date('j F, Y h:i A', strtotime($row['created_at']));
+                $lineData = array($count, $datetime, $row['name'],$row['emp_name'], $getQuotation->created_at,  'Rs '.$getQuotation->total_amount.'('.$getQuotation->gst.')', $invoice, $InvoiceAmount, $invoiceDate);
+                fputcsv($f, $lineData, $delimiter);
+                $count++;
+            }
+            // Move back to beginning of file
+            fseek($f, 0);
+            // Set headers to download file rather than displayed
+            header('Content-Type: text/csv');
+            header('Content-Disposition: attachment; filename="' . $filename . '";');
+            //output all remaining data on a file pointer
+            fpassthru($f);
+        }
     }
 
-    // Invoice Management
-    public function allInvoice(){
-        $data = $this->EnquiryRepository->GetAllInvoice();
-        return view('admin.invoice.index', compact('data'));
-    }
+   
 
 }
